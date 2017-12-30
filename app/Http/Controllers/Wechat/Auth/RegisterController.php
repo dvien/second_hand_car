@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/wechat./home';
+    protected $redirectTo = '/wechat/home';
 
     /**
      * Create a new controller instance.
@@ -76,6 +76,6 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('wechat..auth.register');
+        return view('wechat.auth.register');
     }
 }

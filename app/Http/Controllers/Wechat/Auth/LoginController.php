@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/wechat./home';
+    protected $redirectTo = '/wechat/home';
 
     /**
      * Create a new controller instance.
@@ -45,7 +45,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('wechat..auth.login');
+        return view('wechat.auth.login');
     }
 
     /**
@@ -60,6 +60,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/wechat./login');
+        return redirect('/wechat/login');
     }
 }
