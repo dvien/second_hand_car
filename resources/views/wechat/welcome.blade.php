@@ -66,10 +66,10 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (Route::has('wechat.login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin/home') }}">Home</a>
+                        <a href="{{ url('/wechat/home') }}">Home</a>
                     @else
                         <a href="{{ route('wechat.login') }}">Login</a>
                         <a href="{{ route('wechat.register') }}">Register</a>

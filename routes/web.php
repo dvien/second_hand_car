@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {
-    dd('/');
+
+    dd(
+        \Auth::user(),
+        \Auth::guard('wechat')->user()
+    );
 //    return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

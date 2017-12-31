@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wechat\Auth;
 use App\Http\Controllers\Wechat\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -35,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:wechat')->except('logout');
     }
 
     /**
@@ -58,8 +59,18 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
-        $request->session()->invalidate();
+//        $request->session()->invalidate();
 
         return redirect('/wechat/login');
+    }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('wechat'); // 自定义认证驱动
     }
 }

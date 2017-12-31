@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Wechat\Auth;
 
-use App\Models\AdminUser;
+use App\Models\WechatUser;
 use App\Http\Controllers\Wechat\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -36,7 +36,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:wechat');
     }
 
     /**
@@ -49,7 +49,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admin_user',
+            'email' => 'required|string|email|max:255|unique:wechat_user',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -62,7 +62,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return AdminUser::create([
+        return WechatUser::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
