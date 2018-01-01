@@ -42,4 +42,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.rule', $data);
     });
+
+    // 推广二维码
+    Route::get('/agent/qr_code', function () {
+        $data['page_title'] = '推广二维码';
+
+        return view('wechat.agent.qr_code', $data);
+    });
 });
