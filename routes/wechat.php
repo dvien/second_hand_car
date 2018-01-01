@@ -35,4 +35,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.center', $data);
     });
+
+    // 代理规则
+    Route::get('/agent/rule', function () {
+        $data['page_title'] = '代理规则';
+
+        return view('wechat.agent.rule', $data);
+    });
 });
