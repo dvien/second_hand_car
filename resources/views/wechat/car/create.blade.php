@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">性别:</label>
 
-                <div class="col-xs-10">
+                <div class="col-sm-10">
                     <div class="radio col-xs-6 text-center">
                         <label>
                             <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">男

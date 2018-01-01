@@ -21,4 +21,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.car.create', $data);
     });
+
+    // 我要代理
+    Route::get('/agent/create', function () {
+        $data['page_title'] = '我要代理';
+
+        return view('wechat.agent.create', $data);
+    });
 });
