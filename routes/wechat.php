@@ -28,4 +28,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.create', $data);
     });
+
+    // 代理中心
+    Route::get('/agent/center', function () {
+        $data['page_title'] = '代理中心';
+
+        return view('wechat.agent.center', $data);
+    });
 });
