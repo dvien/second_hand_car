@@ -8,4 +8,17 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/admin', function () {
+        $data['page_title'] = '高价收车，上门评估';
+
+        return view('adminlte', $data);
+    });
+
+    // 高价收车，上门评估
+    Route::get('/car/create', function () {
+        $data['page_title'] = '高价收车，上门评估';
+
+        return view('wechat.car.create', $data);
+    });
 });
