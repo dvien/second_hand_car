@@ -18,4 +18,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/car', function () {
         return view('admin.car.index');
     });
+
+    // 新入库处理操作
+    Route::get('/car/{id}/deal_new', function () {
+        return view('admin.car.deal_new');
+    });
 });
