@@ -23,4 +23,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/car/{id}/deal_new', function () {
         return view('admin.car.deal_new');
     });
+
+    // 洽谈中处理操作
+    Route::get('/car/{id}/deal_talk', function () {
+        return view('admin.car.deal_talk');
+    });
 });
