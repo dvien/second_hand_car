@@ -70,4 +70,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.apply', $data);
     });
+
+    // 我的账户
+    Route::get('/agent/my_account', function () {
+        $data['page_title'] = '我的账户';
+
+        return view('wechat.agent.my_account', $data);
+    });
 });
