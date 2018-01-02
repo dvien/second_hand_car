@@ -56,4 +56,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.my_user', $data);
     });
+
+    // 我的车库
+    Route::get('/agent/my_car', function () {
+        $data['page_title'] = '我的车库';
+
+        return view('wechat.agent.my_car', $data);
+    });
 });
