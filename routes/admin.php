@@ -63,4 +63,19 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/agent/{id}', function () {
         return view('admin.agent.show');
     });
+
+    // 财务列表
+    Route::get('/finance', function () {
+        return view('admin.finance.index');
+    });
+
+    // 财务处理
+    Route::get('/finance/{id}/deal_wait', function () {
+        return view('admin.finance.deal_wait');
+    });
+
+    // 财务详情
+    Route::get('/finance/{id}', function () {
+        return view('admin.finance.show');
+    });
 });
