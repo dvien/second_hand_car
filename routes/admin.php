@@ -38,4 +38,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/apply', function () {
         return view('admin.apply.index');
     });
+
+    // 提现处理
+    Route::get('/apply/{id}/deal_wait', function () {
+        return view('admin.apply.deal_wait');
+    });
 });
