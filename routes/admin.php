@@ -29,7 +29,7 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
         return view('admin.car.deal_talk');
     });
 
-    // 车库详情查看
+    // 成交车库详情查看
     Route::get('/car/{id}', function () {
         return view('admin.car.show');
     });
