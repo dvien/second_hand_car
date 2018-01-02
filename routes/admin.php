@@ -9,7 +9,13 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    // 后台首页
     Route::get('/center', function () {
         return view('admin.center');
+    });
+
+    // 车库
+    Route::get('/car', function () {
+        return view('admin.car.index');
     });
 });
