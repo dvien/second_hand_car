@@ -43,4 +43,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/apply/{id}/deal_wait', function () {
         return view('admin.apply.deal_wait');
     });
+
+    // 提现详情
+    Route::get('/apply/{id}', function () {
+        return view('admin.apply.show');
+    });
 });

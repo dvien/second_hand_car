@@ -18,7 +18,7 @@
                     <td>2017.12.21</td>
                     <td>菊花</td>
                     <td>
-                        <a href="/admin/apply/1/deal_wait">
+                        <a href="/admin/apply/1">
                             <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
                         </a>
                     </td>
