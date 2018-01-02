@@ -48,4 +48,19 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/apply/{id}', function () {
         return view('admin.apply.show');
     });
+
+    // 代理列表
+    Route::get('/agent', function () {
+        return view('admin.agent.index');
+    });
+
+    // 代理处理
+    Route::get('/agent/{id}/deal_wait', function () {
+        return view('admin.agent.deal_wait');
+    });
+
+    // 代理详情
+    Route::get('/agent/{id}', function () {
+        return view('admin.agent.show');
+    });
 });
