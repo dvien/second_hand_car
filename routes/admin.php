@@ -64,6 +64,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
         return view('admin.agent.show');
     });
 
+    // TODO: 系统设置没有, 因为没有添加的页面
+
     // 财务列表
     Route::get('/finance', function () {
         return view('admin.finance.index');
