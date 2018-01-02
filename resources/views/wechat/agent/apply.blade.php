@@ -20,12 +20,13 @@
     <form class="form-horizontal">
         <div class="box-body">
             <div class="form-group">
-                <div class="col-sm-12">
-                <label>提现方式</label>
-                <select class="form-control">
-                    <option>支付宝</option>
-                    <option>微信</option>
-                </select>
+                <label for="inputPassword3" class="col-sm-2 control-label">提现方式:</label>
+
+                <div class="col-sm-10">
+                    <select class="form-control col-sm-10">
+                        <option>支付宝</option>
+                        <option>微信</option>
+                    </select>
                 </div>
             </div>
 
