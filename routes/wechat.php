@@ -64,10 +64,10 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         return view('wechat.agent.my_car', $data);
     });
 
-    // 我的账户
-    Route::get('/agent/my_account', function () {
-        $data['page_title'] = '我的账户';
+    // 申请提现
+    Route::get('/agent/apply', function () {
+        $data['page_title'] = '申请提现';
 
-        return view('wechat.agent.my_account', $data);
+        return view('wechat.agent.apply', $data);
     });
 });
