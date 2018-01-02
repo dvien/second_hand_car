@@ -28,4 +28,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/car/{id}/deal_talk', function () {
         return view('admin.car.deal_talk');
     });
+
+    // 车库详情查看
+    Route::get('/car/{id}', function () {
+        return view('admin.car.show');
+    });
 });
