@@ -49,4 +49,11 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         return view('wechat.agent.qr_code', $data);
     });
+
+    // 我的团队
+    Route::get('/agent/my_user', function () {
+        $data['page_title'] = '我的团队';
+
+        return view('wechat.agent.my_user', $data);
+    });
 });
