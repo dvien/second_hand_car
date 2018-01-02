@@ -14,7 +14,7 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
         return view('admin.center');
     });
 
-    // 车库
+    // 车库列表
     Route::get('/car', function () {
         return view('admin.car.index');
     });
@@ -32,5 +32,10 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 成交车库详情查看
     Route::get('/car/{id}', function () {
         return view('admin.car.show');
+    });
+
+    // 提现列表
+    Route::get('/apply', function () {
+        return view('admin.apply.index');
     });
 });
