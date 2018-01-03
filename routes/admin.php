@@ -70,6 +70,11 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
         return view('admin.user.index');
     });
 
+    // 用户创建
+    Route::get('/user/create', function () {
+        return view('admin.user.create');
+    });
+
     // 财务列表
     Route::get('/finance', function () {
         return view('admin.finance.index');
