@@ -15,66 +15,64 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         return view('adminlte', $data);
     });
 
-    // 高价收车，上门评估
-    Route::get('/car/create', function () {
-        $data['page_title'] = '高价收车，上门评估';
+    Route::middleware(['is_wechat_login'])->group(function () {
+        // 高价收车，上门评估
+        Route::get('/car/create', 'CarController@create');
 
-        return view('wechat.car.create', $data);
-    });
+        // 我要代理
+        Route::get('/agent/create', function () {
+            $data['page_title'] = '我要代理';
 
-    // 我要代理
-    Route::get('/agent/create', function () {
-        $data['page_title'] = '我要代理';
+            return view('wechat.agent.create', $data);
+        });
 
-        return view('wechat.agent.create', $data);
-    });
+        // 代理中心
+        Route::get('/agent/center', function () {
+            $data['page_title'] = '代理中心';
 
-    // 代理中心
-    Route::get('/agent/center', function () {
-        $data['page_title'] = '代理中心';
+            return view('wechat.agent.center', $data);
+        });
 
-        return view('wechat.agent.center', $data);
-    });
+        // 代理规则
+        Route::get('/agent/rule', function () {
+            $data['page_title'] = '代理规则';
 
-    // 代理规则
-    Route::get('/agent/rule', function () {
-        $data['page_title'] = '代理规则';
+            return view('wechat.agent.rule', $data);
+        });
 
-        return view('wechat.agent.rule', $data);
-    });
+        // 推广二维码
+        Route::get('/agent/qr_code', function () {
+            $data['page_title'] = '推广二维码';
 
-    // 推广二维码
-    Route::get('/agent/qr_code', function () {
-        $data['page_title'] = '推广二维码';
+            return view('wechat.agent.qr_code', $data);
+        });
 
-        return view('wechat.agent.qr_code', $data);
-    });
+        // 我的团队
+        Route::get('/agent/my_user', function () {
+            $data['page_title'] = '我的团队';
 
-    // 我的团队
-    Route::get('/agent/my_user', function () {
-        $data['page_title'] = '我的团队';
+            return view('wechat.agent.my_user', $data);
+        });
 
-        return view('wechat.agent.my_user', $data);
-    });
+        // 我的车库
+        Route::get('/agent/my_car', function () {
+            $data['page_title'] = '我的车库';
 
-    // 我的车库
-    Route::get('/agent/my_car', function () {
-        $data['page_title'] = '我的车库';
+            return view('wechat.agent.my_car', $data);
+        });
 
-        return view('wechat.agent.my_car', $data);
-    });
+        // 申请提现
+        Route::get('/agent/apply', function () {
+            $data['page_title'] = '申请提现';
 
-    // 申请提现
-    Route::get('/agent/apply', function () {
-        $data['page_title'] = '申请提现';
+            return view('wechat.agent.apply', $data);
+        });
 
-        return view('wechat.agent.apply', $data);
-    });
+        // 我的账户
+        Route::get('/agent/my_account', function () {
+            $data['page_title'] = '我的账户';
 
-    // 我的账户
-    Route::get('/agent/my_account', function () {
-        $data['page_title'] = '我的账户';
-
-        return view('wechat.agent.my_account', $data);
+            return view('wechat.agent.my_account', $data);
+        });
     });
 });
