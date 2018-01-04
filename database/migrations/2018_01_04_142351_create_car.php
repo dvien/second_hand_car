@@ -33,6 +33,7 @@ class CreateCar extends Migration
             $table->string('description')->default('')->comment('情况');
             $table->decimal('income')->default(0.00)->comment('收入: 收入 = 利润 - 一级提成 - 二级提成');
             $table->decimal('commission')->default(0.00)->comment('分佣: 分佣 = 一级提成 + 二级提成');
+            $table->integer('clear_state')->default(0)->comment('结算状态: 0 未处理; 1 等待结算 2 已结算;');
             $table->timestamps();
             $table->softDeletes();
         });
