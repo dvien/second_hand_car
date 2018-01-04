@@ -27,7 +27,8 @@ class CreateWechatUser extends Migration
             $table->string('hangye')->default('')->comment('行业');
             $table->string('job')->default('')->comment('职务');
             $table->integer('wechat_user_type')->default(0)->comment('字典: 1 代理人');
-            $table->integer('invite_wechat_user_id')->default(0)->comment('邀请人的用户 id');
+            $table->integer('first_wechat_user_id')->default(0)->comment('一级代理人');
+            $table->integer('second_wechat_user_id')->default(0)->comment('二级代理人');
             $table->decimal('can_get_price')->default(0.00)->comment('可提现总金额');
             $table->decimal('has_get_price')->default(0.00)->comment('已经提现总金额');
             $table->decimal('getting_price')->default(0.00)->comment('处理中金额');
