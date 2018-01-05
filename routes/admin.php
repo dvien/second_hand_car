@@ -14,6 +14,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 后台首页
     Route::get('/center', 'HomeController@center');
 
+    /**
+     * 车辆相关模块
+     */
     // 车库列表
     Route::get('/car', 'CarController@index');
 
@@ -26,6 +29,10 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 成交车库详情查看
     Route::get('/car/{id}', 'CarController@show');
 
+
+    /**
+     * 提现相关模块
+     */
     // 提现列表
     Route::get('/apply', 'ApplyController@index');
 
@@ -35,6 +42,10 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 提现详情
     Route::get('/apply/{id}', 'ApplyController@show');
 
+
+    /**
+     * 代理相关模块
+     */
     // 代理列表
     Route::get('/agent', 'AgentController@index');
 
@@ -44,13 +55,20 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 代理详情
     Route::get('/agent/{id}', 'AgentController@show');
 
-    // TODO: 系统设置没有, 因为没有添加的页面
+
+    /**
+     * 后台用户相关模块
+     */
     // 后台用户列表
     Route::get('/user', 'UserController@index');
 
     // 用户创建
     Route::get('/user/create', 'UserController@create');
 
+
+    /**
+     * 财务
+     */
     // 财务列表
     Route::get('/finance', 'FinanceController@index');
 
