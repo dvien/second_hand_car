@@ -15,7 +15,7 @@ class CreateAdminUserTable extends Migration
     {
         Schema::create('admin_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('real_name')->comment('真名');
+            $table->string('real_name')->default('')->comment('真名');
             $table->string('name')->comment('登录名')->unique();
             $table->string('email')->comment('登陆邮箱')->unique();
             $table->string('password');
