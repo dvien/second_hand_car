@@ -32,6 +32,7 @@ class CarController extends Controller
     {
         $input = $request->only([
             'owner_name',
+            'sex',
             'phone',
             'brand',
             'price',

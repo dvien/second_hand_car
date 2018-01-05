@@ -10,6 +10,9 @@ class WechatUser extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    // 是代理人
+    const AGENT_CODE = 1;
+
     protected $table = 'wechat_user';
 
     /**
@@ -44,5 +47,20 @@ class WechatUser extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    public $sex = [
+        [
+            'code' => 0,
+            'name' => '未知',
+        ],
+        [
+            'code' => 1,
+            'name' => '男',
+        ],
+        [
+            'code' => 2,
+            'name' => '女',
+        ],
     ];
 }
