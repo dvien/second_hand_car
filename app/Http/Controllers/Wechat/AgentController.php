@@ -64,4 +64,11 @@ class AgentController extends Controller
 
         return view('wechat.agent.qr_code', $this->data);
     }
+    public function myUser()
+    {
+        $this->data['page_title'] = '我的团队';
+        // TODO: 团队数据还没查询
+
+        return view('wechat.agent.my_user', $this->data);
+    }
 }

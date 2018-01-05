@@ -36,11 +36,7 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         Route::get('/agent/qr_code', 'AgentController@qrCode');
 
         // 我的团队
-        Route::get('/agent/my_user', function () {
-            $data['page_title'] = '我的团队';
-
-            return view('wechat.agent.my_user', $data);
-        });
+        Route::get('/agent/my_user', 'AgentController@myUser');
 
         // 我的车库
         Route::get('/agent/my_car', function () {
