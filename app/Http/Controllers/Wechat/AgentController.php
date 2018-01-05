@@ -64,11 +64,36 @@ class AgentController extends Controller
 
         return view('wechat.agent.qr_code', $this->data);
     }
+
     public function myUser()
     {
         $this->data['page_title'] = '我的团队';
         // TODO: 团队数据还没查询
 
         return view('wechat.agent.my_user', $this->data);
+    }
+
+    public function myCar()
+    {
+        $this->data['page_title'] = '我的车库';
+        // TODO: 车库数据还没查询
+
+        return view('wechat.agent.my_car', $this->data);
+    }
+
+    public function apply()
+    {
+        $this->data['page_title'] = '申请提现';
+        // TODO: 提现表单没有实现
+
+        return view('wechat.agent.apply', $this->data);
+    }    
+
+    public function myAccount()
+    {
+        $this->data['page_title'] = '提现记录';
+        // TODO: 提现记录据还没查询
+
+        return view('wechat.agent.my_account', $this->data);
     }
 }
