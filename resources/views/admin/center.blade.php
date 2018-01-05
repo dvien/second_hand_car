@@ -18,7 +18,7 @@
     </div>
 
     <div class="row text-center">
-        <a href="{{ url('admin/set') }}" style="color: #333;">
+        <a href="{{ url('admin/user') }}" style="color: #333;">
             <div class="col-xs-4" style="padding: 20px; border: 1px solid #ccc; line-height: 50px;">系统设置</div>
         </a>
         <a href="{{ url('admin/finance') }}" style="color: #333;">
