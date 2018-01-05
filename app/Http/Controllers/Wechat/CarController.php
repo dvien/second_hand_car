@@ -23,6 +23,8 @@ class CarController extends Controller
 
         $data['owner_sex'] = (new Car())->ownerSex;
 
+        $data['wechat_user_type'] = $this->auth->wechat_user_type;
+
         return view('wechat.car.create', $data);
     }
 

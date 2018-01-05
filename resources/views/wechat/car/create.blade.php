@@ -111,5 +111,27 @@
         </div>
         <div class="col-xs-2"></div>
     </div>
+
+    <div class="row" style="padding-top: 20px;">
+        @if($wechat_user_type == 1)
+            <a href="{{ url('wechat/agent/center') }}">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">代理中心</button>
+                    </div>
+                </div>
+            </a>
+        @else
+            <a href="{{ url('wechat/agent/create') }}">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">我要代理</button>
+                    </div>
+                </div>
+            </a>
+        @endif
+    </div>
+
+    <div style="padding-top: 20px;"></div>
 </div>
 @endsection
