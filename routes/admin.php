@@ -4,7 +4,9 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Auth::routes();
 
     Route::get('/', function () {
-        return view('admin.welcome');
+        return redirect('admin/center');
+
+//        return view('admin.welcome');
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -25,19 +27,13 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/car/{id}', 'CarController@show');
 
     // 提现列表
-    Route::get('/apply', function () {
-        return view('admin.apply.index');
-    });
+    Route::get('/apply', 'ApplyController@index');
 
     // 提现处理
-    Route::get('/apply/{id}/deal_wait', function () {
-        return view('admin.apply.deal_wait');
-    });
+    Route::get('/apply/{id}/deal_wait', 'ApplyController@dealWait');
 
     // 提现详情
-    Route::get('/apply/{id}', function () {
-        return view('admin.apply.show');
-    });
+    Route::get('/apply/{id}', 'ApplyController@show');
 
     // 代理列表
     Route::get('/agent', function () {
