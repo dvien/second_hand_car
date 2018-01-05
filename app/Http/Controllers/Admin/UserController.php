@@ -22,4 +22,11 @@ class UserController extends Controller
 
         return view('admin.user.index', $this->data);
     }
+
+    public function create()
+    {
+        $this->data['page_title'] = '后台用户创建';
+
+        return view('admin.user.create', $this->data);
+    }
 }

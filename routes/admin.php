@@ -49,9 +49,7 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/user', 'UserController@index');
 
     // 用户创建
-    Route::get('/user/create', function () {
-        return view('admin.user.create');
-    });
+    Route::get('/user/create', 'UserController@create');
 
     // 财务列表
     Route::get('/finance', function () {
