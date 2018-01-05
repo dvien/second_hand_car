@@ -36,19 +36,13 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/apply/{id}', 'ApplyController@show');
 
     // 代理列表
-    Route::get('/agent', function () {
-        return view('admin.agent.index');
-    });
+    Route::get('/agent', 'AgentController@index');
 
     // 代理处理
-    Route::get('/agent/{id}/deal_wait', function () {
-        return view('admin.agent.deal_wait');
-    });
+    Route::get('/agent/{id}/deal_wait', 'AgentController@dealWait');
 
     // 代理详情
-    Route::get('/agent/{id}', function () {
-        return view('admin.agent.show');
-    });
+    Route::get('/agent/{id}', 'AgentController@show');
 
     // TODO: 系统设置没有, 因为没有添加的页面
     // 后台用户列表
