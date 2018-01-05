@@ -10,29 +10,19 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     // 后台首页
-    Route::get('/center', function () {
-        return view('admin.center');
-    });
+    Route::get('/center', 'HomeController@center');
 
     // 车库列表
-    Route::get('/car', function () {
-        return view('admin.car.index');
-    });
+    Route::get('/car', 'CarController@index');
 
     // 新入库处理操作
-    Route::get('/car/{id}/deal_new', function () {
-        return view('admin.car.deal_new');
-    });
+    Route::get('/car/{id}/deal_new', 'CarController@dealNew');
 
     // 洽谈中处理操作
-    Route::get('/car/{id}/deal_talk', function () {
-        return view('admin.car.deal_talk');
-    });
+    Route::get('/car/{id}/deal_talk', 'CarController@dealTalk');
 
     // 成交车库详情查看
-    Route::get('/car/{id}', function () {
-        return view('admin.car.show');
-    });
+    Route::get('/car/{id}', 'CarController@show');
 
     // 提现列表
     Route::get('/apply', function () {
