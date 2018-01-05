@@ -52,17 +52,11 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/user/create', 'UserController@create');
 
     // 财务列表
-    Route::get('/finance', function () {
-        return view('admin.finance.index');
-    });
+    Route::get('/finance', 'FinanceController@index');
 
     // 财务处理
-    Route::get('/finance/{id}/deal_wait', function () {
-        return view('admin.finance.deal_wait');
-    });
+    Route::get('/finance/{id}/deal_wait', 'FinanceController@dealWait');
 
     // 财务详情
-    Route::get('/finance/{id}', function () {
-        return view('admin.finance.show');
-    });
+    Route::get('/finance/{id}', 'FinanceController@show');
 });
