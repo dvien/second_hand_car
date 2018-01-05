@@ -46,9 +46,7 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
 
     // TODO: 系统设置没有, 因为没有添加的页面
     // 后台用户列表
-    Route::get('/user', function () {
-        return view('admin.user.index');
-    });
+    Route::get('/user', 'UserController@index');
 
     // 用户创建
     Route::get('/user/create', function () {
