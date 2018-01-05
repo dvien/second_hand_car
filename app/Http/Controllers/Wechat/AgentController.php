@@ -49,4 +49,11 @@ class AgentController extends Controller
 
         return view('wechat.agent.center', $this->data);
     }
+
+    public function rule()
+    {
+        $this->data['page_title'] = '代理规则';
+
+        return view('wechat.agent.rule', $this->data);
+    }
 }

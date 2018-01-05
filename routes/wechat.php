@@ -30,11 +30,7 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         Route::get('/agent/center', 'AgentController@center');
 
         // 代理规则
-        Route::get('/agent/rule', function () {
-            $data['page_title'] = '代理规则';
-
-            return view('wechat.agent.rule', $data);
-        });
+        Route::get('/agent/rule', 'AgentController@rule');
 
         // 推广二维码
         Route::get('/agent/qr_code', function () {
