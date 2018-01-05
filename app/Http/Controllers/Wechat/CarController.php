@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Http\Requests\Wechat\CarPost;
+use App\Models\Car;
 use App\Repositories\CarRepository;
 
 class CarController extends Controller
@@ -19,6 +21,26 @@ class CarController extends Controller
     {
         $data['page_title'] = '高价收车，上门评估';
 
+        $data['owner_sex'] = (new Car())->ownerSex;
+
         return view('wechat.car.create', $data);
+    }
+
+    public function store(CarPost $request)
+    {
+        $input = $request->only([
+            'owner_name',
+            'phone',
+            'brand',
+            'price',
+            'date',
+            'address',
+        ]);
+
+        $input['wechat_user_id'] = $this->auth->id;
+
+        $this->carRepository->store($input);
+
+        return redirect('wechat/car/create');
     }
 }

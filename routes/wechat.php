@@ -19,6 +19,8 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         // 高价收车，上门评估
         Route::get('/car/create', 'CarController@create');
 
+        Route::post('/car', 'CarController@store');
+
         // 我要代理
         Route::get('/agent/create', function () {
             $data['page_title'] = '我要代理';

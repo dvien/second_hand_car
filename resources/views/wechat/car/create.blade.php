@@ -7,72 +7,73 @@
 
 @section('content')
 <div class="row">
-    <form class="form-horizontal">
+    <form class="form-horizontal" method="POST" action="{{ url('wechat/car') }}">
+        {{ csrf_field() }}
+
         <div class="box-body">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">车主姓名:</label>
+                <label for="owner_name" class="col-sm-2 control-label">车主姓名:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputEmail3" placeholder="Email" type="email">
+                    <input class="form-control" id="owner_name" name="owner_name" placeholder="车主姓名" type="text" maxlength=6>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">性别:</label>
+                <label for="owner_sex" class="col-sm-2 control-label">性别:</label>
 
                 <div class="col-sm-10">
-                    <div class="radio col-xs-6 text-center">
-                        <label>
-                            <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">男
-                        </label>
-                    </div>
-                    <div class="radio col-xs-6 text-center">
-                        <label>
-                            <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">女
-                        </label>
-                    </div>
+                    @foreach($owner_sex as $sex)
+                        @if($sex['code'] > 0)
+                        <div class="radio col-xs-6 text-center">
+                            <label>
+                                <input name="owner_sex" value={{ $sex['code'] }} checked="" type="radio">
+                                {{ $sex['name'] }}
+                            </label>
+                        </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">手机号码:</label>
+                <label for="phone" class="col-sm-2 control-label">手机号码:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Password" type="password">
+                    <input class="form-control" id="phone" name="phone" placeholder="手机号码" type="text">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">品牌车型:</label>
+                <label for="brand" class="col-sm-2 control-label">品牌车型:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Password" type="text">
+                    <input class="form-control" id="brand" name="brand" placeholder="品牌车型" type="text">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">期望售价:</label>
+                <label for="price" class="col-sm-2 control-label">期望售价:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Password" type="text">
+                    <input class="form-control" id="price" name="price" placeholder="期望售价" type="text">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">预约时间:</label>
+                <label for="date" class="col-sm-2 control-label">预约时间:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Password" type="date">
+                    <input class="form-control" id="date" name="date" placeholder="预约时间" type="date">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">预约地点:</label>
+                <label for="address" class="col-sm-2 control-label">预约地点:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Password" type="text">
+                    <input class="form-control" id="address" name="address" placeholder="预约地点" type="text">
                 </div>
             </div>
         </div>
-        <!-- /.box-body -->
+
         <div class="box-footer text-center" style="border: none;">
             <button type="submit" class="btn btn-info">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
         </div>
-        <!-- /.box-footer -->
     </form>
 
     <div class="row text-center" style="padding-top: 10px">

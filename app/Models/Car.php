@@ -27,4 +27,19 @@ class Car extends BaseModel
         'commission',
         'clear_state',
     ];
+
+    public $ownerSex = [
+        [
+            'code' => 0,
+            'name' => '未知',
+        ],
+        [
+            'code' => 1,
+            'name' => '男',
+        ],
+        [
+            'code' => 2,
+            'name' => '女',
+        ],
+    ];
 }

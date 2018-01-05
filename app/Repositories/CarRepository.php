@@ -10,5 +10,13 @@ use App\Models\Car;
  */
 class CarRepository extends BaseRepository
 {
+    public function __construct(Car $car)
+    {
+        $this->car = $car;
+    }
 
+    public function store($input)
+    {
+        $this->car->create($input);
+    }
 }
