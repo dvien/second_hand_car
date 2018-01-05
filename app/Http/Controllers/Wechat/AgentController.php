@@ -28,6 +28,11 @@ class AgentController extends Controller
 
     public function store(AgentPost $request)
     {
+        // 已经是代理人就跳转到 代理中心
+        if ($this->auth->wechat_user_type == WechatUser::AGENT_CODE) {
+            return redirect('wechat/agent/center');
+        }
+
         $input = $request->only([
             'name',
             'sex',
@@ -36,11 +41,9 @@ class AgentController extends Controller
             'job',
         ]);
 
-        $input['wechat_user_type'] = WechatUser::AGENT_CODE;
-
         $this->auth->update($input);
 
-        return redirect('wechat/agent/center');
+        return redirect('wechat/car/create');
     }
 
     public function center()
