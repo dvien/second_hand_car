@@ -19,11 +19,11 @@ class AgentController extends Controller
             return redirect('wechat/agent/center');
         }
 
-        $data['page_title'] = '我要代理';
+        $this->data['page_title'] = '我要代理';
 
-        $data['sex'] = (new WechatUser())->sex;
+        $this->data['sex'] = (new WechatUser())->sex;
 
-        return view('wechat.agent.create', $data);
+        return view('wechat.agent.create', $this->data);
     }
 
     public function store(AgentPost $request)
@@ -41,5 +41,12 @@ class AgentController extends Controller
         $this->auth->update($input);
 
         return redirect('wechat/agent/center');
+    }
+
+    public function center()
+    {
+        $this->data['page_title'] = '代理中心';
+
+        return view('wechat.agent.center', $this->data);
     }
 }

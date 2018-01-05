@@ -27,11 +27,7 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         Route::post('/agent', 'AgentController@store');
 
         // 代理中心
-        Route::get('/agent/center', function () {
-            $data['page_title'] = '代理中心';
-
-            return view('wechat.agent.center', $data);
-        });
+        Route::get('/agent/center', 'AgentController@center');
 
         // 代理规则
         Route::get('/agent/rule', function () {

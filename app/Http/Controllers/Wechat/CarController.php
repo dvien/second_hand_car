@@ -19,13 +19,13 @@ class CarController extends Controller
 
     public function create()
     {
-        $data['page_title'] = '高价收车，上门评估';
+        $this->data['page_title'] = '高价收车，上门评估';
 
-        $data['owner_sex'] = (new Car())->ownerSex;
+        $this->data['owner_sex'] = (new Car())->ownerSex;
 
-        $data['wechat_user_type'] = $this->auth->wechat_user_type;
+        $this->data['wechat_user_type'] = $this->auth->wechat_user_type;
 
-        return view('wechat.car.create', $data);
+        return view('wechat.car.create', $this->data);
     }
 
     public function store(CarPost $request)
