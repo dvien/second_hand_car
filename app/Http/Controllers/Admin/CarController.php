@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\DealNewPost;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,25 @@ class CarController extends Controller
     {
         $this->data['page_title'] = '新入库处理操作';
 
+        $this->data['car'] = $this->car->find($id);
+
+        $this->data['car_states'] = $this->car->getDealNewCarStates();
+
         return view('admin.car.deal_new', $this->data);
+    }
+
+    public function dealNewUpdate(DealNewPost $request, $id)
+    {
+        $car = $this->car->find($id);
+
+        if ($car->car_state != Car::NEW_CAR_CODE) {
+            return redirect(url("admin/car/{$car}"));
+        } else {
+            $car->car_state = $request->get('car_state');
+            $car->save();
+
+            return redirect(url("admin/car?car_state={$car->car_state}"));
+        }
     }
 
     public function dealTalk($id)

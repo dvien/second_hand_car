@@ -30,7 +30,7 @@ class Car extends BaseModel
         'clear_state',
     ];
 
-    public $ownerSex = [
+    public $ownerSexes = [
         [
             'code' => 0,
             'name' => '未知',
@@ -45,7 +45,9 @@ class Car extends BaseModel
         ],
     ];
 
-    public $carState = [
+    const NEW_CAR_CODE = 1;
+
+    public $carStates = [
         [
             'code' => 1,
             'name' => '新入库',
@@ -72,9 +74,14 @@ class Car extends BaseModel
         'owner_sex_str',
     ];
 
+    /**
+     * 性别转中文
+     *
+     * @return string
+     */
     public function getOwnerSexStrAttribute()
     {
-        foreach ($this->ownerSex AS $sex) {
+        foreach ($this->ownerSexes AS $sex) {
             if ($sex['code'] == $this->owner_sex) {
                 return $sex['name'];
             }
@@ -83,11 +90,22 @@ class Car extends BaseModel
         return '';
     }
 
+    /**
+     * 车辆分页, 根据指定状态
+     *
+     * @param int $carState
+     * @return mixed
+     */
     public function getListByState($carState = 1)
     {
-        return $this->where('car_state', $carState)->simplePaginate(1);
+        return $this->where('car_state', $carState)->simplePaginate(1)->appends(['car_state' => $carState]);
     }
 
+    /**
+     * 车辆状态统计
+     *
+     * @return array
+     */
     public function countByState()
     {
         $field = [
@@ -97,7 +115,7 @@ class Car extends BaseModel
 
         $counts = $this->groupBy('car_state')->get($field)->pluck('count', 'car_state');
 
-        foreach ($this->carState AS &$state) {
+        foreach ($this->carStates AS &$state) {
             $code = $state['code'];
 
             $state['count'] = isset($counts[$code]) ? $counts[$code] : 0;
@@ -105,6 +123,20 @@ class Car extends BaseModel
 
         unset($state);
 
-        return $this->carState;
+        return $this->carStates;
+    }
+
+    /**
+     * 处理新入库需要的下拉状态
+     */
+    public function getDealNewCarStates()
+    {
+        $needCodes = [2, 4];
+
+        $result = array_filter($this->carStates, function ($state) use($needCodes) {
+            return in_array($state['code'], $needCodes);
+        });
+
+        return $result;
     }
 }

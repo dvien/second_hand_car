@@ -23,6 +23,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 新入库处理操作
     Route::get('/car/{id}/deal_new', 'CarController@dealNew');
 
+    Route::post('/car/{id}/deal_new', 'CarController@dealNewUpdate');
+
     // 洽谈中处理操作
     Route::get('/car/{id}/deal_talk', 'CarController@dealTalk');
 
