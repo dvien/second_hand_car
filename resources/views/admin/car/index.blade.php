@@ -14,36 +14,30 @@
                     <th class="text-center">处理</th>
                 </tr>
 
+                @foreach($cars AS $car)
                 <tr>
-                    <td>2017.12.21</td>
-                    <td>菊花</td>
+                    <td>{{ $car->date }}</td>
+                    <td>{{ $car->owner_name }}</td>
                     <td>
-                        <a href="/admin/car/1">
+                        <a href="/admin/car/{{ $car->id }}">
                             <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
                         </a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>2017.12.21</td>
-                    <td>菊花</td>
-                    <td>
-                        <a href="/admin/car/1">
-                            <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
-                        </a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($cars->previousPageUrl())
+                <li><a href="{{ $cars->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($cars->nextPageUrl())
+            <li><a href="{{ $cars->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection

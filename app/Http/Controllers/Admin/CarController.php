@@ -3,22 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Car;
-use App\Repositories\CarRepository;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    protected $carRepository;
+    protected $car;
 
-    public function __construct(CarRepository $carRepository)
+    public function __construct(Car $car)
     {
         parent::__construct();
 
-        $this->carRepository = $carRepository;
+        $this->car = $car;
+
+        $this->data['cars_count'] = $this->car->countByState();
     }
 
-    public function index()
+    public function index(Request $request, Car $car)
     {
         $this->data['page_title'] = '车库列表';
+
+        $carSteate = $request->get('car_state', 1);
+
+        $this->data['cars'] = $car->getListByState($carSteate);
 
         return view('admin.car.index', $this->data);
     }

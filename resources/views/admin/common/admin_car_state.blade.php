@@ -1,17 +1,12 @@
 <div class="row">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        @foreach($cars_count AS $car_count)
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">XX新入库</button>
+            <a href="{{ url('admin/car') }}?car_state={{ $car_count['code']}}">
+                <button type="button" class="btn btn-default">{{ $car_count['count'] }} {{  $car_count['name'] }}</button>
+            </a>
         </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">XX洽谈中</button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">XX成交</button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">XX未成交</button>
-        </div>
+        @endforeach
     </div>
 </div>
 
