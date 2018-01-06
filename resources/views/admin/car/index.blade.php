@@ -19,7 +19,7 @@
                     <td>{{ $car->date }}</td>
                     <td>{{ $car->owner_name }}</td>
                     <td>
-                        <a href="/admin/car/{{ $car->id }}">
+                        <a href="{{ $car->url }}">
                             <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
                         </a>
                     </td>

@@ -25,9 +25,31 @@ class CarController extends Controller
     {
         $this->data['page_title'] = '车库列表';
 
-        $carSteate = $request->get('car_state', 1);
+        $this->data['current_car_state'] = $carSteate = $request->get('car_state', Car::NEW_CAR_CODE);
 
-        $this->data['cars'] = $car->getListByState($carSteate);
+        $cars = $car->getListByState($carSteate);
+
+        // 不同状态的车辆进入不同的链接
+        foreach ($cars AS &$car) {
+            switch ($car->car_state) {
+                case Car::NEW_CAR_CODE:
+                    $car->url = url("admin/car/{$car->id}/deal_new");
+                    break;
+                case Car::TALK_CAR_CODE:
+                    $car->url = url("admin/car/{$car->id}/deal_talk");
+                    break;
+                case Car::DONE_CAR_CODE:
+                    $car->url = url("admin/car/{$car->id}");
+                    break;
+                default:
+                    $car->url = url("admin/car/{$car->id}");
+                    break;
+            }
+        }
+
+        unset($car);
+
+        $this->data['cars'] = $cars;
 
         return view('admin.car.index', $this->data);
     }
