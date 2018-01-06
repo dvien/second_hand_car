@@ -76,7 +76,7 @@ class WechatUser extends Authenticatable
     public $wechatUserTypes = [
         [
             'code' => 0,
-            'name' => '代理人',
+            'name' => '未申请',
         ],
         [
             'code' => self::AGENT_CODE,
