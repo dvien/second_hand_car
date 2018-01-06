@@ -21,7 +21,7 @@ class CarController extends Controller
     {
         $this->data['page_title'] = '高价收车，上门评估';
 
-        $this->data['owner_sex'] = (new Car())->ownerSex;
+        $this->data['owner_sex'] = (new Car())->ownerSexes;
 
         $this->data['wechat_user_type'] = $this->auth->wechat_user_type;
 
@@ -41,6 +41,10 @@ class CarController extends Controller
         ]);
 
         $input['wechat_user_id'] = $this->auth->id;
+
+        $input['first_wechat_user_id'] = $this->auth->first_wechat_user_id;
+
+        $input['second_wechat_user_id'] = $this->auth->second_wechat_user_id;
 
         $this->carRepository->store($input);
 
