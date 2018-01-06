@@ -6,6 +6,10 @@
                 var ele =$("input[name='{{$key}}']");
                 ele.after("<span class='help-block' style='color: #dd4b39;'><strong>{{$error[0]}}</strong></span>");
                 ele.parent().addClass('has-error');
+
+                var ele =$("#{{$key}}");
+                ele.after("<span class='help-block' style='color: #dd4b39;'><strong>{{$error[0]}}</strong></span>");
+                ele.parent().addClass('has-error');
             </script>
         @endif
     @endforeach
