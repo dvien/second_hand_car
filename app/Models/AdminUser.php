@@ -10,6 +10,9 @@ class AdminUser extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    // 分页数
+    const PER_PAGE = 1;
+
     protected $table = 'admin_user';
 
     /**
@@ -29,4 +32,14 @@ class AdminUser extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 后台用户分页
+     *
+     * @return mixed
+     */
+    public function getList()
+    {
+        return $this->paginate(self::PER_PAGE);
+    }
 }

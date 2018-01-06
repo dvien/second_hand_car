@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Car;
-use App\Repositories\CarRepository;
+
+use App\Models\AdminUser;
 
 class UserController extends Controller
 {
-    protected $carRepository;
+    protected $adminUser;
 
-    public function __construct(CarRepository $carRepository)
+    public function __construct(AdminUser $adminUser)
     {
         parent::__construct();
 
-        $this->carRepository = $carRepository;
+        $this->adminUser = $adminUser;
     }
 
     public function index()
     {
         $this->data['page_title'] = '后台用户列表';
+
+        $this->data['admin_users'] = $this->adminUser->getList();
 
         return view('admin.user.index', $this->data);
     }
