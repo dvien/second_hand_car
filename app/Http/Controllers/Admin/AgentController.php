@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\WechatUserDealWaitPost;
 use App\Models\WechatUser;
 use Illuminate\Http\Request;
 
@@ -49,12 +50,37 @@ class AgentController extends Controller
     {
         $this->data['page_title'] = '代理处理';
 
+        $this->data['wechat_user'] = $wechatUser = $this->wechatUser->find($id);
+
+        // 不是申请中状态就跳转到详情页
+        if ($wechatUser->wechat_user_type != WechatUser::APPLY_AGENT_CODE) {
+            return redirect(url("admin/agent/{$wechatUser->id}"));
+        }
+
+        $this->data['wechat_user_types'] = $this->wechatUser->getDealWaitWechatUserStates();
+
         return view('admin.agent.deal_wait', $this->data);
+    }
+
+    public function dealWaitUpdate(WechatUserDealWaitPost $request, $id)
+    {
+        $wechatUser = $this->wechatUser->find($id);
+
+        if ($wechatUser->wechat_user_type != WechatUser::APPLY_AGENT_CODE) {
+            return redirect(url("admin/agent/{$wechatUser->id}"));
+        } else {
+            $wechatUser->wechat_user_type = $request->get('wechat_user_type');
+            $wechatUser->save();
+
+            return redirect(url("admin/agent/{$wechatUser->id}"));
+        }
     }
 
     public function show($id)
     {
         $this->data['page_title'] = '代理详情';
+
+        $this->data['wechat_user'] = $this->wechatUser->find($id);
 
         return view('admin.agent.show', $this->data);
     }

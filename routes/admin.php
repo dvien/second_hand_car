@@ -43,6 +43,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 提现处理
     Route::get('/apply/{id}/deal_wait', 'ApplyController@dealWait');
 
+    Route::post('/apply/{id}/deal_wait', 'ApplyController@dealWaitUpdate');
+
     // 提现详情
     Route::get('/apply/{id}', 'ApplyController@show');
 
@@ -55,6 +57,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
 
     // 代理处理
     Route::get('/agent/{id}/deal_wait', 'AgentController@dealWait');
+
+    Route::post('/agent/{id}/deal_wait', 'AgentController@dealWaitUpdate');
 
     // 代理详情
     Route::get('/agent/{id}', 'AgentController@show');

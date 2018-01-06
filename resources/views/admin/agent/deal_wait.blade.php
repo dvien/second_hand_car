@@ -8,40 +8,45 @@
             <tbody>
                 <tr>
                     <td>姓名:</td>
-                    <td>王某某</td>
+                    <td>{{ $wechat_user->name }}</td>
                 </tr>
 
                 <tr>
                     <td>性别:</td>
-                    <td>男</td>
+                    <td>{{ $wechat_user->sex_str }}</td>
                 </tr>
 
                 <tr>
                     <td>手机号码:</td>
-                    <td>13459999999</td>
+                    <td>{{ $wechat_user->phone }}</td>
                 </tr>
 
                 <tr>
                     <td>从事行业:</td>
-                    <td>销售</td>
+                    <td>{{ $wechat_user->hangye }}</td>
                 </tr>
 
                 <tr>
                     <td>职务:</td>
-                    <td>望海车行销售经理</td>
+                    <td>{{ $wechat_user->job }}</td>
                 </tr>
             </tbody>
         </table>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="POST" action="{{ url("admin/agent/{$wechat_user->id}/deal_wait") }}">
+            {{ csrf_field() }}
+
             <div class="box-body">
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label" style="text-align: left;">处理:</label>
+                    <label for="wechat_user_type" class="col-sm-2 control-label" style="text-align: left;">处理:</label>
 
                     <div class="col-sm-10">
-                        <select class="form-control col-sm-10">
-                            <option>通过</option>
-                            <option>不通过</option>
+                        <select class="form-control col-sm-10" name="wechat_user_type" id="wechat_user_type">
+                            @foreach($wechat_user_types AS $wechat_user_type)
+                                <option value={{ $wechat_user_type['code'] }} @if (old('wechat_user_type') == $wechat_user_type['code']) selected @endif>
+                                    {{ $wechat_user_type['name'] }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

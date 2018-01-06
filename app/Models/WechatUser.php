@@ -16,8 +16,11 @@ class WechatUser extends Authenticatable
     // 是代理人
     const AGENT_CODE = 1;
 
-    // 申请为代理人
+    // 申请为代理人 中
     const APPLY_AGENT_CODE = 2;
+
+    // 申请为代理人 不通过
+    const UNPASS_AGENT_CODE = 3;
 
     protected $table = 'wechat_user';
 
@@ -55,7 +58,7 @@ class WechatUser extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public $sex = [
+    public $sexes = [
         [
             'code' => 0,
             'name' => '未知',
@@ -70,6 +73,56 @@ class WechatUser extends Authenticatable
         ],
     ];
 
+    public $wechatUserTypes = [
+        [
+            'code' => 0,
+            'name' => '代理人',
+        ],
+        [
+            'code' => self::AGENT_CODE,
+            'name' => '代理人',
+        ],
+        [
+            'code' => self::APPLY_AGENT_CODE,
+            'name' => '申请中',
+        ],
+        [
+            'code' => self::UNPASS_AGENT_CODE,
+            'name' => '不通过',
+        ],
+    ];
+
+    /**
+     * 性别转中文
+     *
+     * @return string
+     */
+    public function getSexStrAttribute()
+    {
+        foreach ($this->sexes AS $sex) {
+            if ($sex['code'] == $this->sex) {
+                return $sex['name'];
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * 性别转中文
+     *
+     * @return string
+     */
+    public function getWechatUserTypeStrAttribute()
+    {
+        foreach ($this->wechatUserTypes AS $wechatUserType) {
+            if ($wechatUserType['code'] == $this->wechat_user_type) {
+                return $wechatUserType['name'];
+            }
+        }
+
+        return '';
+    }
 
     /**
      * 微信用户(代理人)分页, 根据指定状态
@@ -92,5 +145,22 @@ class WechatUser extends Authenticatable
         }
 
         return $query;
+    }
+
+    /**
+     * 申请为代理人能选到的状态
+     */
+    public function getDealWaitWechatUserStates()
+    {
+        $needCodes = [
+            self::AGENT_CODE,
+            self::UNPASS_AGENT_CODE,
+        ];
+
+        $result = array_filter($this->wechatUserTypes, function ($state) use($needCodes) {
+            return in_array($state['code'], $needCodes);
+        });
+
+        return $result;
     }
 }
