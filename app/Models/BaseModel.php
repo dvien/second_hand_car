@@ -12,4 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BaseModel extends Model
 {
     use SoftDeletes;
+
+    // 分页数量
+    const PER_PAGE = 1;
 }

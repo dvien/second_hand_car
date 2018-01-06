@@ -120,7 +120,9 @@ class Car extends BaseModel
      */
     public function getListByState($carState = 1)
     {
-        return $this->where('car_state', $carState)->simplePaginate(1)->appends(['car_state' => $carState]);
+        return $this->where('car_state', $carState)
+                    ->paginate(self::PER_PAGE)
+                    ->appends(['car_state' => $carState]);
     }
 
     /**

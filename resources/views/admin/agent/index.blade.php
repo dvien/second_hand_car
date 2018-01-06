@@ -14,36 +14,30 @@
                     <th class="text-center">处理</th>
                 </tr>
 
+                @foreach($wechat_users as $wechat_user)
                 <tr>
-                    <td>2017.12.21</td>
-                    <td>菊花</td>
+                    <td>{{ $wechat_user->created_at_str }}</td>
+                    <td>{{ $wechat_user->name }}</td>
                     <td>
-                        <a href="/admin/agent/1">
+                        <a href="{{ $wechat_user->url }}">
                             <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
                         </a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>2017.12.21</td>
-                    <td>菊花</td>
-                    <td>
-                        <a href="/admin/agent/1/deal_wait">
-                            <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
-                        </a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($wechat_users->previousPageUrl())
+                <li><a href="{{ $wechat_users->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($wechat_users->nextPageUrl())
+                <li><a href="{{ $wechat_users->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection

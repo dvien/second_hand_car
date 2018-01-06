@@ -10,6 +10,9 @@ class WechatUser extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    // 分页数
+    const PER_PAGE = 1;
+
     // 是代理人
     const AGENT_CODE = 1;
 
@@ -66,4 +69,28 @@ class WechatUser extends Authenticatable
             'name' => '女',
         ],
     ];
+
+
+    /**
+     * 微信用户(代理人)分页, 根据指定状态
+     *
+     * @param int $wechatUserType
+     * @return mixed
+     */
+    public function getListByType($wechatUserType = null)
+    {
+        $query = new self;
+
+        if (is_numeric($wechatUserType)) {
+            $query = $query->where('wechat_user_type', $wechatUserType);
+        }
+
+        $query = $query->paginate(self::PER_PAGE);
+
+        if (is_numeric($wechatUserType)) {
+            $query = $query->appends(['wechat_user_type' => $wechatUserType]);
+        }
+
+        return $query;
+    }
 }
