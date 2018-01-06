@@ -6,7 +6,7 @@ use App\Models\Car;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DealNewPost extends FormRequest
+class CarDealNewPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

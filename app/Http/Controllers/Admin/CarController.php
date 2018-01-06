@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\DealNewPost;
-use App\Http\Requests\Admin\DealTalkPost;
+use App\Http\Requests\Admin\CarDealNewPost;
+use App\Http\Requests\Admin\CarDealTalkPost;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,7 +65,7 @@ class CarController extends Controller
         return view('admin.car.deal_new', $this->data);
     }
 
-    public function dealNewUpdate(DealNewPost $request, $id)
+    public function dealNewUpdate(CarDealNewPost $request, $id)
     {
         $car = $this->car->find($id);
 
@@ -91,7 +91,7 @@ class CarController extends Controller
         return view('admin.car.deal_talk', $this->data);
     }
 
-    public function dealTalkUpdate(DealTalkPost $request, $id)
+    public function dealTalkUpdate(CarDealTalkPost $request, $id)
     {
         $car = $this->car->find($id);
 
