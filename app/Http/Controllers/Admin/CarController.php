@@ -73,6 +73,7 @@ class CarController extends Controller
             return redirect(url("admin/car/{$car}"));
         } else {
             $car->car_state = $request->get('car_state');
+            $car->admin_user_id = $this->auth->id;
             $car->save();
 
             return redirect(url("admin/car?car_state={$car->car_state}"));
@@ -130,6 +131,8 @@ class CarController extends Controller
 
                     break;
             }
+
+            $input['admin_user_id'] = $this->auth->id;
 
             DB::transaction(function () use ($car, $input) {
                 // 更新车辆信息
