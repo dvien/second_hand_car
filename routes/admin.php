@@ -73,6 +73,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 用户创建
     Route::get('/user/create', 'UserController@create');
 
+    Route::post('/user', 'UserController@store');
+
 
     /**
      * 财务
