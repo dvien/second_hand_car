@@ -22,7 +22,7 @@ class AgentController extends Controller
 
         $this->data['page_title'] = '我要代理';
 
-        $this->data['sex'] = (new WechatUser())->sex;
+        $this->data['sex'] = (new WechatUser())->sexes;
 
         return view('wechat.agent.create', $this->data);
     }
