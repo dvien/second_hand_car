@@ -47,6 +47,8 @@ class CarController extends Controller
     {
         $this->data['page_title'] = '车辆详情';
 
+        $this->data['car'] = $this->car->find($id);
+
         return view('admin.car.show', $this->data);
     }
 }

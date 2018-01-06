@@ -8,52 +8,52 @@
             <tbody>
                 <tr>
                     <td>车主姓名:</td>
-                    <td>王某某</td>
+                    <td>{{ $car->owner_name }}</td>
                 </tr>
 
                 <tr>
                     <td>性别:</td>
-                    <td>男</td>
+                    <td>{{ $car->owner_sex_str }}</td>
                 </tr>
 
                 <tr>
                     <td>手机号码:</td>
-                    <td>13459999999</td>
+                    <td>{{ $car->phone }}</td>
                 </tr>
 
                 <tr>
                     <td>品牌车型:</td>
-                    <td>路虎</td>
+                    <td>{{ $car->brand }}</td>
                 </tr>
 
                 <tr>
                     <td>期望售价:</td>
-                    <td>998</td>
+                    <td>{{ $car->price }}</td>
                 </tr>
 
                 <tr>
                     <td>预约时间:</td>
-                    <td>2018-02-22</td>
+                    <td>{{ $car->date }}</td>
                 </tr>
 
                 <tr>
                     <td>预约地点:</td>
-                    <td>软件园二期我日路</td>
+                    <td>{{ $car->address }}</td>
                 </tr>
 
                 <tr>
                     <td>利润:</td>
-                    <td>995</td>
+                    <td>{{ $car->profit }}</td>
                 </tr>
 
                 <tr>
                     <td>一级提成:</td>
-                    <td>995</td>
+                    <td>{{ $car->first_price }}</td>
                 </tr>
 
                 <tr>
                     <td>二级提成:</td>
-                    <td>995</td>
+                    <td>{{ $car->second_price }}</td>
                 </tr>
             </tbody>
         </table>

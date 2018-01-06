@@ -68,6 +68,21 @@ class Car extends BaseModel
         ],
     ];
 
+    protected $appends = [
+        'owner_sex_str',
+    ];
+
+    public function getOwnerSexStrAttribute()
+    {
+        foreach ($this->ownerSex AS $sex) {
+            if ($sex['code'] == $this->owner_sex) {
+                return $sex['name'];
+            }
+        }
+
+        return '';
+    }
+
     public function getListByState($carState = 1)
     {
         return $this->where('car_state', $carState)->simplePaginate(1);
