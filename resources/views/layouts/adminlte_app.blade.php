@@ -26,5 +26,7 @@
 
 <script src="{{ asset('js/adminlte.js') }}"></script>
 @include('layouts.adminlte_error_jq')
+
+@yield('content_js')
 </body>
 </html>

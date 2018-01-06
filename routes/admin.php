@@ -28,6 +28,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     // 洽谈中处理操作
     Route::get('/car/{id}/deal_talk', 'CarController@dealTalk');
 
+    Route::post('/car/{id}/deal_talk', 'CarController@dealTalkUpdate');
+
     // 成交车库详情查看
     Route::get('/car/{id}', 'CarController@show');
 

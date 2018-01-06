@@ -45,26 +45,36 @@ class Car extends BaseModel
         ],
     ];
 
+    // 新入库
     const NEW_CAR_CODE = 1;
+
+    // 洽谈中
+    const TALK_CAR_CODE = 2;
+
+    // 成交
+    const DONE_CAR_CODE = 3;
+
+    // 未成交
+    const UNDONE_CAR_CODE = 4;
 
     public $carStates = [
         [
-            'code' => 1,
+            'code' => self::NEW_CAR_CODE,
             'name' => '新入库',
             'count' => 0,
         ],
         [
-            'code' => 2,
+            'code' => self::TALK_CAR_CODE,
             'name' => '洽谈中',
             'count' => 0,
         ],
         [
-            'code' => 3,
+            'code' => self::DONE_CAR_CODE,
             'name' => '成交',
             'count' => 0,
         ],
         [
-            'code' => 4,
+            'code' => self::UNDONE_CAR_CODE,
             'name' => '未成交',
             'count' => 0,
         ],
@@ -73,6 +83,18 @@ class Car extends BaseModel
     protected $appends = [
         'owner_sex_str',
     ];
+
+    // 所属的一级代理人
+    public function firstWechatUser()
+    {
+        return $this->belongsTo(WechatUser::class, 'first_wechat_user_id', 'id');
+    }
+
+    // 所属的二级代理人
+    public function secondWechatUser()
+    {
+        return $this->belongsTo(WechatUser::class, 'second_wechat_user_id', 'id');
+    }
 
     /**
      * 性别转中文
@@ -131,7 +153,29 @@ class Car extends BaseModel
      */
     public function getDealNewCarStates()
     {
-        $needCodes = [2, 4];
+        $needCodes = [
+            self::TALK_CAR_CODE,
+            self::UNDONE_CAR_CODE,
+        ];
+
+        $result = array_filter($this->carStates, function ($state) use($needCodes) {
+            return in_array($state['code'], $needCodes);
+        });
+
+        return $result;
+    }
+
+    /**
+     * 处理中车辆需要的下拉状态
+     */
+    public function getDealTalkCarStates()
+    {
+        $needCodes = [
+            self::TALK_CAR_CODE,
+            self::DONE_CAR_CODE,
+            self::UNDONE_CAR_CODE,
+
+        ];
 
         $result = array_filter($this->carStates, function ($state) use($needCodes) {
             return in_array($state['code'], $needCodes);
