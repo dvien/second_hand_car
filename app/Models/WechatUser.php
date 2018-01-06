@@ -13,6 +13,9 @@ class WechatUser extends Authenticatable
     // 是代理人
     const AGENT_CODE = 1;
 
+    // 申请为代理人
+    const APPLY_AGENT_CODE = 2;
+
     protected $table = 'wechat_user';
 
     /**

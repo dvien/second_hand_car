@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Http\Requests\Wechat\AgentPost;
+use App\Models\Car;
 use App\Models\WechatUser;
 
 class AgentController extends Controller
@@ -40,6 +41,8 @@ class AgentController extends Controller
             'hangye',
             'job',
         ]);
+
+        $input['wechat_user_type'] = WechatUser::APPLY_AGENT_CODE;
 
         $this->auth->update($input);
 
