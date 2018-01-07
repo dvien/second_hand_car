@@ -14,5 +14,5 @@ class BaseModel extends Model
     use SoftDeletes;
 
     // 分页数量
-    const PER_PAGE = 1;
+    const PER_PAGE = 10;
 }

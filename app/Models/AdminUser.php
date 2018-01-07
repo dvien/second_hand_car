@@ -11,7 +11,7 @@ class AdminUser extends Authenticatable
     use Notifiable, SoftDeletes;
 
     // 分页数
-    const PER_PAGE = 1;
+    const PER_PAGE = 10;
 
     protected $table = 'admin_user';
 
