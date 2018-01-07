@@ -16,6 +16,11 @@ class CarController extends Controller
         $this->car = $car;
     }
 
+    /**
+     * 车辆登记
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $this->data['page_title'] = '高价收车，上门评估';
@@ -27,6 +32,12 @@ class CarController extends Controller
         return view('wechat.car.create', $this->data);
     }
 
+    /**
+     * 车辆登记数据处理
+     *
+     * @param CarPost $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(CarPost $request)
     {
         $input = $request->only([

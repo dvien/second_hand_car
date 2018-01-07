@@ -16,6 +16,11 @@ class AgentController extends Controller
         $this->wechatUser = $wechatUser;
     }
 
+    /**
+     * 我要代理
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create()
     {
         // 已经是代理人就跳转到 代理中心
@@ -30,6 +35,12 @@ class AgentController extends Controller
         return view('wechat.agent.create', $this->data);
     }
 
+    /**
+     * 我要代理数据处理
+     *
+     * @param AgentPost $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(AgentPost $request)
     {
         // 已经是代理人就跳转到 代理中心
@@ -52,6 +63,11 @@ class AgentController extends Controller
         return redirect('wechat/car/create');
     }
 
+    /**
+     * 代理中心
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function center()
     {
         $this->data['page_title'] = '代理中心';
@@ -59,6 +75,11 @@ class AgentController extends Controller
         return view('wechat.agent.center', $this->data);
     }
 
+    /**
+     * 代理规则
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function rule()
     {
         $this->data['page_title'] = '代理规则';
@@ -66,6 +87,11 @@ class AgentController extends Controller
         return view('wechat.agent.rule', $this->data);
     }
 
+    /**
+     * 推广二维码
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function qrCode()
     {
         $this->data['page_title'] = '推广二维码';
@@ -88,6 +114,11 @@ class AgentController extends Controller
         return view('wechat.agent.my_user', $this->data);
     }
 
+    /**
+     * 我的车库
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function myCar()
     {
         $this->data['page_title'] = '我的车库';
@@ -96,14 +127,24 @@ class AgentController extends Controller
         return view('wechat.agent.my_car', $this->data);
     }
 
+    /**
+     * 申请提现
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function apply()
     {
         $this->data['page_title'] = '申请提现';
         // TODO: 提现表单没有实现
 
         return view('wechat.agent.apply', $this->data);
-    }    
+    }
 
+    /**
+     * 提现记录
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function myAccount()
     {
         $this->data['page_title'] = '提现记录';
