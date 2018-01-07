@@ -181,7 +181,7 @@ class Car extends BaseModel
     public function getDealTalkCarStates()
     {
         $needCodes = [
-            self::NEW_CAR_CODE,
+            self::TALK_CAR_CODE,
             self::DONE_CAR_CODE,
             self::UNDONE_CAR_CODE,
         ];

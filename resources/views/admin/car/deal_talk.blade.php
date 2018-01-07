@@ -74,19 +74,23 @@
                     </div>
                 </div>
 
+                @if($car->first_wechat_user_id)
                 <div class="form-group" id="first_price_div">
                     <label for="first_price" class="col-sm-2 control-label">一级提成:</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="first_price" name="first_price" placeholder="一级提成" type="text">
                     </div>
                 </div>
+                @endif
 
+                @if($car->second_wechat_user_id)
                 <div class="form-group" id="second_price_div">
                     <label for="second_price" class="col-sm-2 control-label">二级提成:</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="second_price" name="second_price" placeholder="二级提成" type="text">
                     </div>
                 </div>
+                @endif
 
                 <div class="form-group" id="description_div">
                     <label for="description" class="col-sm-2 control-label">情况:</label>

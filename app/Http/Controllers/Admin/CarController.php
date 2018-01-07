@@ -82,9 +82,21 @@ class CarController extends Controller
 
     public function dealTalk($id)
     {
+        $car = $this->car->find($id);
+
+        // 已成交 或 未成交 跳转至详情页
+        if (in_array($car->car_state, [Car::DONE_CAR_CODE, Car::UNDONE_CAR_CODE])) {
+            return redirect(url("admin/car/{$id}"));
+        }
+
+        // 新入库 跳转至更新状态页
+        if (in_array($car->car_state, [Car::NEW_CAR_CODE])) {
+            return redirect(url("admin/car/{$id}/deal_new"));
+        }
+
         $this->data['page_title'] = '洽谈中处理操作';
 
-        $this->data['car'] = $this->car->find($id);
+        $this->data['car'] = $car;
 
         $this->data['car_states'] = $this->car->getDealTalkCarStates();
 
@@ -113,9 +125,12 @@ class CarController extends Controller
                     $input = $request->only([
                         'car_state',
                         'profit',
-                        'first_price',
-                        'second_price',
                     ]);
+
+                    // 一二级提成有对应人才提取对应的金额, 否则赋值为 0 .
+                    $input['first_price']  = $car->first_wechat_user_id ? $request->get('first_price') : 0;
+
+                    $input['second_price'] = $car->second_wechat_user_id ? $request->get('second_price') : 0;
 
                     // 收入 = 利润 - 一级提成 - 二级提成
                     $input['income'] = (float)$input['profit'] - (float)$input['first_price'] - (float)$input['second_price'];

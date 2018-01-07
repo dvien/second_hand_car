@@ -25,30 +25,44 @@ class CarDealTalkPost extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules(Request $request, Car $car)
     {
-        $dealNewCarStates = (new Car())->getDealTalkCarStates();
+        $dealNewCarStates = $car->getDealTalkCarStates();
 
         $validCodes = array_pluck($dealNewCarStates, 'code');
 
         // 不同下拉框校验不一样的情况
         switch ($request->get('car_state')) {
             case Car::TALK_CAR_CODE:
-                return [
+                $rules = [
                     'car_state' => Rule::in($validCodes),
                 ];
+                break;
             case Car::DONE_CAR_CODE:
-                return [
+                $rules = [
                     'car_state' => Rule::in($validCodes),
                     'profit'    => 'required|numeric',
-                    'first_price'  => 'required|numeric',
-                    'second_price' => 'required|numeric',
                 ];
+
+                // 一二级提成有对应人才要填写金额
+                $carItem = $car->find($request->segment(3));
+
+                if ($carItem->first_wechat_user_id) {
+                    $rules['first_price'] = 'required|numeric';
+                }
+
+                if ($carItem->second_wechat_user_id) {
+                    $rules['second_price'] = 'required|numeric';
+                }
+
+                break;
             case Car::UNDONE_CAR_CODE:
-                return [
+                $rules = [
                     'car_state' => Rule::in($validCodes),
                 ];
         }
+
+        return $rules;
     }
 
     public function attributes()
