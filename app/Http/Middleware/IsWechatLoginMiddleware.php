@@ -20,7 +20,7 @@ class IsWechatLoginMiddleware
             return $next($request);
         } else {
             // TODO: 没有微信登陆就登陆一个测试账号
-            $this->guard()->loginUsingId(1, true);
+            $this->guard()->loginUsingId(2, true);
 
             return $next($request);
         }

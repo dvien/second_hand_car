@@ -3,19 +3,11 @@
 Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function () {
     Auth::routes();
 
-    Route::get('/', function () {
-        return view('wechat.welcome');
-    });
-
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::get('/admin', function () {
-        $data['page_title'] = '高价收车，上门评估';
-
-        return view('adminlte', $data);
-    });
-
     Route::middleware(['is_wechat_login'])->group(function () {
+        Route::get('/', function () {
+            return redirect(url('wechat/car/create'));
+        });
+
         // 高价收车，上门评估
         Route::get('/car/create', 'CarController@create');
 
