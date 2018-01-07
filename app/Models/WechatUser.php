@@ -184,4 +184,23 @@ class WechatUser extends Authenticatable
                     ->orWhere('second_wechat_user_id', $wechatUserId)
                     ->paginate(self::PER_PAGE);
     }
+
+    /**
+     * 我发展的用户id (且包含我自己的)
+     *
+     * @param $wechatUserId
+     * @return mixed
+     */
+    public function myUserIds($wechatUserId)
+    {
+        $myUserIds = $this->where('first_wechat_user_id', $wechatUserId)
+                        ->orWhere('second_wechat_user_id', $wechatUserId)
+                        ->pluck('id')
+                        ->toArray();
+
+        // 补上用户自己的
+        array_unshift($myUserIds, $wechatUserId);
+
+        return $myUserIds;
+    }
 }
