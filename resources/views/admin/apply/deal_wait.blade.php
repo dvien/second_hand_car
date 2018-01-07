@@ -33,14 +33,18 @@
             </tbody>
         </table>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="POST" action="{{ url("admin/apply/{$pay->id}/deal_wait") }}">
+            {{ csrf_field() }}
+
             <div class="box-body">
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">处理:</label>
+                    <label for="pay_state" class="col-sm-2 control-label" style="text-align: left;">处理:</label>
 
                     <div class="col-sm-10">
-                        <select class="form-control col-sm-10">
-                            <option>已转</option>
+                        <select class="form-control col-sm-10" id="pay_state" name="pay_state">
+                            @foreach($pay_states as $pay_state)
+                                <option value="{{ $pay_state['code'] }}">{{ $pay_state['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -48,10 +52,9 @@
                 <div class="box-footer text-center" style="border: none;">
                     <button type="submit" class="btn btn-info">&nbsp;&nbsp;确定&nbsp;&nbsp;</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="" class="btn">&nbsp;&nbsp;返回&nbsp;&nbsp;</button>
+                    {{--<button type="" class="btn">&nbsp;&nbsp;返回&nbsp;&nbsp;</button>--}}
                 </div>
             </div>
-            <!-- /.box-footer -->
         </form>
 
 

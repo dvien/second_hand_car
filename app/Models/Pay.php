@@ -122,7 +122,6 @@ class Pay extends BaseModel
                     ->paginate(self::PER_PAGE);
     }
 
-
     /**
      * 提现记录分页, 根据指定状态
      *
@@ -144,5 +143,23 @@ class Pay extends BaseModel
         }
 
         return $query;
+    }
+
+    /**
+     * 处理申请提现的下拉选项
+     *
+     * @return array|mixed
+     */
+    public function getDealWaitPayStates()
+    {
+        $needCodes = [
+            self::STATE_OK,
+        ];
+
+        $result = array_filter($this->payStates, function ($payState) use($needCodes) {
+            return in_array($payState['code'], $needCodes);
+        });
+
+        return $result;
     }
 }
