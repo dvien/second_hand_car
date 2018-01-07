@@ -201,7 +201,7 @@ class Car extends BaseModel
      */
     public function getMyListByState($wechatUser, $carState = 1)
     {
-        $myUserIds = $wechatUser->myUserIds($wechatUser->id);
+        $myUserIds = $wechatUser->myUserIds($wechatUser);
 
         return $this->whereIn('first_wechat_user_id', $myUserIds)
                     ->where('car_state', $carState)

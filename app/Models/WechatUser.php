@@ -192,18 +192,20 @@ class WechatUser extends Authenticatable
     /**
      * 我的车库: (如果是我自己是代理人那就包含我自己, 因为只有代理人才能看到, 所以一定会包含我自己)
      *
-     * @param $wechatUserId
+     * @param $wechatUser
      * @return mixed
      */
-    public function myUserIds($wechatUserId)
+    public function myUserIds($wechatUser)
     {
-        $myUserIds = $this->where('first_wechat_user_id', $wechatUserId)
-                        ->orWhere('second_wechat_user_id', $wechatUserId)
+        $myUserIds = $this->where('first_wechat_user_id', $wechatUser->id)
+                        ->orWhere('second_wechat_user_id', $wechatUser->id)
                         ->pluck('id')
                         ->toArray();
 
-        // 补上用户自己的
-        array_unshift($myUserIds, $wechatUserId);
+        // 如果是我自己是代理人那就包含我自己
+        if ($wechatUser->wechat_user_type == WechatUser::AGENT_CODE) {
+            array_unshift($myUserIds, $wechatUser->id);
+        }
 
         return $myUserIds;
     }
