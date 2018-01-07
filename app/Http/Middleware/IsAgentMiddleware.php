@@ -2,10 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\WechatUser;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsWechatLoginMiddleware
+/**
+ * 是否代理人判定, 不是代理人不能进入代理中心等模块
+ *
+ * Class IsAgentMiddleware
+ * @package App\Http\Middleware
+ */
+class IsAgentMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,12 +23,9 @@ class IsWechatLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->guard()->check()) {
-            return $next($request);
+        if ($this->guard()->user()->wechat_user_type != WechatUser::AGENT_CODE) {
+            return redirect(url('wechat/car/create'));
         } else {
-            // TODO: 没有微信登陆就登陆一个测试账号
-            $this->guard()->loginUsingId(3, true);
-
             return $next($request);
         }
     }

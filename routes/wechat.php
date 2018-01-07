@@ -18,27 +18,30 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
         Route::post('/agent', 'AgentController@store');
 
-        // 代理中心
-        Route::get('/agent/center', 'AgentController@center');
+        // 只有代理人才能看的模块
+        Route::middleware(['is_agent'])->group(function () {
+            // 代理中心
+            Route::get('/agent/center', 'AgentController@center');
 
-        // 代理规则
-        Route::get('/agent/rule', 'AgentController@rule');
+            // 代理规则
+            Route::get('/agent/rule', 'AgentController@rule');
 
-        // 推广二维码
-        Route::get('/agent/qr_code', 'AgentController@qrCode');
+            // 推广二维码
+            Route::get('/agent/qr_code', 'AgentController@qrCode');
 
-        // 我的团队
-        Route::get('/agent/my_user', 'AgentController@myUser');
+            // 我的团队
+            Route::get('/agent/my_user', 'AgentController@myUser');
 
-        // 我的车库
-        Route::get('/agent/my_car', 'AgentController@myCar');
+            // 我的车库
+            Route::get('/agent/my_car', 'AgentController@myCar');
 
-        // 申请提现
-        Route::get('/agent/apply', 'AgentController@apply');
+            // 申请提现
+            Route::get('/agent/apply', 'AgentController@apply');
 
-        Route::post('/agent/apply', 'AgentController@applyPost');
+            Route::post('/agent/apply', 'AgentController@applyPost');
 
-        // 我的账户
-        Route::get('/agent/my_account', 'AgentController@myAccount');
+            // 我的账户
+            Route::get('/agent/my_account', 'AgentController@myAccount');
+        });
     });
 });
