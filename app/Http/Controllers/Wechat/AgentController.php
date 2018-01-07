@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Http\Requests\Wechat\AgentPost;
+use App\Http\Requests\Wechat\PayPost;
 use App\Models\Car;
+use App\Models\Pay;
 use App\Models\WechatUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgentController extends Controller
 {
@@ -140,12 +143,54 @@ class AgentController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function apply()
+    public function apply(Pay $pay)
     {
         $this->data['page_title'] = '申请提现';
-        // TODO: 提现表单没有实现
+
+        $this->data['pay_types'] = $pay->getApplyPayTypes();
+
+        $this->data['can_get_price'] = $this->auth->can_get_price;
+
+        $this->data['getting_price'] = $this->auth->getting_price;
+
+        $this->data['has_get_price'] = $this->auth->has_get_price;
 
         return view('wechat.agent.apply', $this->data);
+    }
+
+    /**
+     * 申请提现数据处理
+     *
+     * @param PayPost $request
+     * @param Pay $pay
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function applyPost(PayPost $request, Pay $pay, WechatUser $wechatUser)
+    {
+        DB::transaction(function () use ($request, $pay, $wechatUser) {
+            $input = $request->only([
+                'pay_type',
+                'account',
+                'real_name',
+                'price',
+            ]);
+
+            $input['wechat_user_id'] = $this->auth->id;
+
+            $input['pay_state'] = Pay::STATE_WAIT; // 待处理
+
+            $pay->create($input);
+
+            // 可提现金额 减少
+            $this->auth->can_get_price = (float)$this->auth->can_get_price - (float)$input['price'];
+
+            // 处理中金额 增加
+            $this->auth->getting_price = (float)$this->auth->getting_price + (float)$input['price'];
+
+            $this->auth->save();
+        });
+
+        return redirect(url('wechat/agent/my_account'));
     }
 
     /**

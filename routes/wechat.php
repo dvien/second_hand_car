@@ -44,6 +44,8 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
         // 申请提现
         Route::get('/agent/apply', 'AgentController@apply');
 
+        Route::post('/agent/apply', 'AgentController@applyPost');
+
         // 我的账户
         Route::get('/agent/my_account', 'AgentController@myAccount');
     });
