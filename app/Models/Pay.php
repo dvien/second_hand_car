@@ -50,8 +50,49 @@ class Pay extends BaseModel
         ],
     ];
 
+    /**
+     * 日期格式化处理
+     */
+    public function getCreatedAtStrAttribute()
+    {
+        return $this->created_at->toDateString();
+    }
+
+    /**
+     * 提现状态转中文
+     *
+     * @return string
+     */
+    public function getPayStateStrAttribute()
+    {
+        foreach ($this->payStates AS $payState) {
+            if ($payState['code'] == $this->pay_state) {
+                return $payState['name'];
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * 申请提现账号类型
+     *
+     * @return array
+     */
     public function getApplyPayTypes()
     {
         return $this->payTypes;
+    }
+
+    /**
+     * 微信用户提现记录
+     *
+     * @param $wechatUser
+     * @return mixed
+     */
+    public function getMyAccountList($wechatUser)
+    {
+        return $this->where('wechat_user_id', $wechatUser->id)
+                    ->paginate(self::PER_PAGE);
     }
 }

@@ -11,23 +11,29 @@
                 <tr>
                     <th class="text-center">日期</th>
                     <th class="text-center">提现金额</th>
+                    <th class="text-center">状态</th>
                 </tr>
 
+                @foreach($my_applies as $my_apply)
                 <tr>
-                    <td>2018.01.02</td>
-                    <td>23</td>
+                    <td>{{ $my_apply->created_at_str }}</td>
+                    <td>{{ $my_apply->price }}</td>
+                    <td>{{ $my_apply->pay_state_str }}</td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($my_applies->previousPageUrl())
+                <li><a href="{{ $my_applies->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($my_applies->nextPageUrl())
+                <li><a href="{{ $my_applies->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection

@@ -198,10 +198,11 @@ class AgentController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function myAccount()
+    public function myAccount(Pay $pay)
     {
         $this->data['page_title'] = '提现记录';
-        // TODO: 提现记录据还没查询
+
+        $this->data['my_applies'] = $pay->getMyAccountList($this->auth);
 
         return view('wechat.agent.my_account', $this->data);
     }
