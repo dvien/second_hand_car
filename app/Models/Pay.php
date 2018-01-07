@@ -51,6 +51,16 @@ class Pay extends BaseModel
     ];
 
     /**
+     * 提现记录所属微信用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function wechat_user()
+    {
+        return $this->belongsTo(WechatUser::class, 'wechat_user_id', 'id');
+    }
+
+    /**
      * 日期格式化处理
      */
     public function getCreatedAtStrAttribute()
@@ -68,6 +78,22 @@ class Pay extends BaseModel
         foreach ($this->payStates AS $payState) {
             if ($payState['code'] == $this->pay_state) {
                 return $payState['name'];
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * 提现账号类型转中文
+     *
+     * @return string
+     */
+    public function getPayTypeStrAttribute()
+    {
+        foreach ($this->payTypes AS $payType) {
+            if ($payType['code'] == $this->pay_type) {
+                return $payType['name'];
             }
         }
 
@@ -94,5 +120,29 @@ class Pay extends BaseModel
     {
         return $this->where('wechat_user_id', $wechatUser->id)
                     ->paginate(self::PER_PAGE);
+    }
+
+
+    /**
+     * 提现记录分页, 根据指定状态
+     *
+     * @param int $payState
+     * @return mixed
+     */
+    public function getListByState($payState = null)
+    {
+        $query = new self;
+
+        if (is_numeric($payState)) {
+            $query = $query->where('pay_state', $payState);
+        }
+
+        $query = $query->paginate(self::PER_PAGE);
+
+        if (is_numeric($payState)) {
+            $query = $query->appends(['pay_state' => $payState]);
+        }
+
+        return $query;
     }
 }
