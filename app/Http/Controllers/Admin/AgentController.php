@@ -62,6 +62,13 @@ class AgentController extends Controller
         return view('admin.agent.deal_wait', $this->data);
     }
 
+    /**
+     * 代理人申请处理: 如果会员成为代理人后, 拿一级佣金的代理人 变成自己; 拿二级佣金的代理人 变成原来 拿一级佣金的代理人.
+     *
+     * @param WechatUserDealWaitPost $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function dealWaitUpdate(WechatUserDealWaitPost $request, $id)
     {
         $wechatUser = $this->wechatUser->find($id);
@@ -69,7 +76,17 @@ class AgentController extends Controller
         if ($wechatUser->wechat_user_type != WechatUser::APPLY_AGENT_CODE) {
             return redirect(url("admin/agent/{$wechatUser->id}"));
         } else {
-            $wechatUser->wechat_user_type = $request->get('wechat_user_type');
+            $wechatUserType = $request->get('wechat_user_type');
+
+            $wechatUser->wechat_user_type = $wechatUserType;
+
+            // 如果会员成为代理人后, 拿一级佣金的代理人 变成自己; 拿二级佣金的代理人 变成原来 拿一级佣金的代理人
+            if ($wechatUserType == WechatUser::AGENT_CODE) {
+                $wechatUser->second_wechat_user_id = $wechatUser->first_wechat_user_id;
+
+                $wechatUser->first_wechat_user_id = $wechatUser->id;
+            }
+
             $wechatUser->save();
 
             return redirect(url("admin/agent/{$wechatUser->id}"));
