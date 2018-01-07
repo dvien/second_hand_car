@@ -26,9 +26,9 @@ class CreateCar extends Migration
             $table->integer('car_state')->default(1)->comment('1 新入库; 2 洽谈中; 3 成交; 4 未成交;');
             $table->integer('admin_user_id')->default(0)->comment('最后操作人: 填写利润等操作');
             $table->decimal('profit')->default(0.00)->comment('利润: 操作人自己输入');
-            $table->integer('first_wechat_user_id')->default(0)->comment('一级代理人');
+            $table->integer('first_wechat_user_id')->default(0)->comment('拿一级佣金的代理人');
             $table->decimal('first_price')->default(0.00)->comment('一级提成');
-            $table->integer('second_wechat_user_id')->default(0)->comment('二级代理人');
+            $table->integer('second_wechat_user_id')->default(0)->comment('拿二级佣金的代理人');
             $table->decimal('second_price')->default(0.00)->comment('二级提成');
             $table->string('description')->default('')->comment('情况');
             $table->decimal('income')->default(0.00)->comment('收入: 收入 = 利润 - 一级提成 - 二级提成');
