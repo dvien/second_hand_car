@@ -175,13 +175,17 @@ class WechatUser extends Authenticatable
     }
 
     /**
-     * 我的团队
+     * 我的团队: 必须是代理人是我团队中的一员
      */
     public function getMyUserList($wechatUserId)
     {
         return $this->with(['cars'])
-                    ->where('first_wechat_user_id', $wechatUserId)
-                    ->orWhere('second_wechat_user_id', $wechatUserId)
+                    ->where('wechat_user_type', WechatUser::AGENT_CODE)
+                    ->where(function ($query) use ($wechatUserId) {
+                        $query
+                            ->where('first_wechat_user_id', $wechatUserId)
+                            ->orWhere('second_wechat_user_id', $wechatUserId);
+                    })
                     ->paginate(self::PER_PAGE);
     }
 
