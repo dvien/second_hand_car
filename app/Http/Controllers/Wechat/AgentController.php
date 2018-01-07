@@ -167,6 +167,13 @@ class AgentController extends Controller
      */
     public function applyPost(PayPost $request, Pay $pay, WechatUser $wechatUser)
     {
+        $price = (float)$request->get('price');
+
+        // 输入金额特殊情况处理
+        if ($price <= 0) {
+            return redirect(url('wechat/agent/my_account'));
+        }
+
         DB::transaction(function () use ($request, $pay, $wechatUser) {
             $input = $request->only([
                 'pay_type',
