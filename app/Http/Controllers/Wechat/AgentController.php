@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Http\Requests\Wechat\AgentPost;
+use App\Models\Car;
 use App\Models\WechatUser;
+use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
@@ -119,10 +121,16 @@ class AgentController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function myCar()
+    public function myCar(Request $request, Car $car)
     {
         $this->data['page_title'] = '我的车库';
-        // TODO: 车库数据还没查询
+
+        $this->data['current_car_state'] = $carSteate = $request->get('car_state', Car::NEW_CAR_CODE);
+
+        // TODO: 到底是我自己发部车辆, 还是我的代理人发部的车辆, 还是我和我的代理人发部的车辆
+        $this->data['my_cars'] = $car->getMyListByState($this->auth, $carSteate);
+
+        $this->data['car_states'] = $car->getMyListCarStates();
 
         return view('wechat.agent.my_car', $this->data);
     }

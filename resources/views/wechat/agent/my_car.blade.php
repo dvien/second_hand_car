@@ -6,15 +6,15 @@
     <div style="padding-top: 30px;"></div>
 
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        @foreach($car_states AS $car_state)
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">新入库</button>
+            <a href="{{ url('wechat/agent/my_car') }}?car_state={{ $car_state['code']}}">
+                <button type="button" class="btn btn-flat @if (isset($current_car_state) && $car_state['code'] == $current_car_state) btn-primary @else btn-default @endif" >
+                    {{  $car_state['name'] }}
+                </button>
+            </a>
         </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">成交</button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">未成交</button>
-        </div>
+        @endforeach
     </div>
 
     <div class="table-striped text-center">
@@ -25,25 +25,25 @@
                     <th class="text-center">汽车品牌</th>
                 </tr>
 
+                @foreach($my_cars as $my_car)
                 <tr>
-                    <td style="vertical-align: middle">2017.12.21</td>
-                    <td style="vertical-align: middle">路虎</td>
+                    <td style="vertical-align: middle">{{ $my_car->created_at_str }}</td>
+                    <td style="vertical-align: middle">{{ $my_car->brand }}</td>
                 </tr>
-                <tr>
-                    <td style="vertical-align: middle">2017.12.21</td>
-                    <td style="vertical-align: middle">飞虎</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($my_cars->previousPageUrl())
+                <li><a href="{{ $my_cars->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($my_cars->nextPageUrl())
+                <li><a href="{{ $my_cars->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection

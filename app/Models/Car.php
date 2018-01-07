@@ -113,6 +113,14 @@ class Car extends BaseModel
     }
 
     /**
+     * 日期格式化处理
+     */
+    public function getCreatedAtStrAttribute()
+    {
+        return $this->created_at->toDateString();
+    }
+
+    /**
      * 车辆分页, 根据指定状态
      *
      * @param int $carState
@@ -173,10 +181,41 @@ class Car extends BaseModel
     public function getDealTalkCarStates()
     {
         $needCodes = [
-            self::TALK_CAR_CODE,
+            self::NEW_CAR_CODE,
             self::DONE_CAR_CODE,
             self::UNDONE_CAR_CODE,
+        ];
 
+        $result = array_filter($this->carStates, function ($state) use($needCodes) {
+            return in_array($state['code'], $needCodes);
+        });
+
+        return $result;
+    }
+
+    /**
+     * 我的车库车辆分页, 根据指定状态
+     *
+     * @param int $carState
+     * @return mixed
+     */
+    public function getMyListByState($wechatUser, $carState = 1)
+    {
+        return $this->where('wechat_user_id', $wechatUser->id)
+                    ->where('car_state', $carState)
+                    ->paginate(self::PER_PAGE)
+                    ->appends(['car_state' => $carState]);
+    }
+
+    /**
+     * 处理中车辆需要的下拉状态
+     */
+    public function getMyListCarStates()
+    {
+        $needCodes = [
+            self::NEW_CAR_CODE,
+            self::DONE_CAR_CODE,
+            self::UNDONE_CAR_CODE,
         ];
 
         $result = array_filter($this->carStates, function ($state) use($needCodes) {
