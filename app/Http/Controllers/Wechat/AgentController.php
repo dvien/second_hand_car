@@ -130,7 +130,6 @@ class AgentController extends Controller
 
         $this->data['current_car_state'] = $carSteate = $request->get('car_state', Car::NEW_CAR_CODE);
 
-        // TODO: 到底是我自己发部车辆, 还是我的代理人发部的车辆, 还是我和我的代理人发部的车辆
         $this->data['my_cars'] = $car->getMyListByState($this->auth, $carSteate);
 
         $this->data['car_states'] = $car->getMyListCarStates();
