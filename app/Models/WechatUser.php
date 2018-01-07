@@ -93,6 +93,16 @@ class WechatUser extends Authenticatable
     ];
 
     /**
+     * 用户发部过的车辆
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cars()
+    {
+        return $this->hasMany(Car::class, 'wechat_user_id', 'id');
+    }
+
+    /**
      * 性别转中文
      *
      * @return string
@@ -162,5 +172,16 @@ class WechatUser extends Authenticatable
         });
 
         return $result;
+    }
+
+    /**
+     * 我的团队
+     */
+    public function getMyUserList($wechatUserId)
+    {
+        return $this->with(['cars'])
+                    ->where('first_wechat_user_id', $wechatUserId)
+                    ->orWhere('second_wechat_user_id', $wechatUserId)
+                    ->paginate(self::PER_PAGE);
     }
 }

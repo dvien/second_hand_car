@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Http\Requests\Wechat\AgentPost;
-use App\Models\Car;
 use App\Models\WechatUser;
 
 class AgentController extends Controller
 {
-    public function __construct()
+    protected $wechatUser;
+
+    public function __construct(WechatUser $wechatUser)
     {
         parent::__construct();
+
+        $this->wechatUser = $wechatUser;
     }
 
     public function create()
@@ -71,10 +74,16 @@ class AgentController extends Controller
         return view('wechat.agent.qr_code', $this->data);
     }
 
+    /**
+     * 我的团队
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function myUser()
     {
         $this->data['page_title'] = '我的团队';
-        // TODO: 团队数据还没查询
+
+        $this->data['my_users'] = $this->wechatUser->getMyUserList($this->auth->id);
 
         return view('wechat.agent.my_user', $this->data);
     }

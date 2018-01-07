@@ -14,27 +14,26 @@
                     <th class="text-center">车库车辆</th>
                 </tr>
 
+                @foreach($my_users as $my_user)
                 <tr>
-                    <td><img src="https://adminlte.io/themes/AdminLTE/dist/img/default-50x50.gif" alt="Product Image"></td>
-                    <td style="vertical-align: middle">菊花的笑容</td>
-                    <td style="vertical-align: middle"><span class="badge bg-red">23</span></td>
+                    <td><img src="{{ $my_user->wechat_headimgurl }}" alt="微信头像"></td>
+                    <td style="vertical-align: middle">{{ $my_user->wechat_nickname }}</td>
+                    <td style="vertical-align: middle"><span class="badge bg-red">{{ $my_user->cars->count() }}</span></td>
                 </tr>
-                <tr>
-                    <td><img src="https://adminlte.io/themes/AdminLTE/dist/img/default-50x50.gif" alt="Product Image"></td>
-                    <td style="vertical-align: middle">菊花的笑容</td>
-                    <td style="vertical-align: middle"><span class="badge bg-red">23</span></td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($my_users->previousPageUrl())
+                <li><a href="{{ $my_users->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($my_users->nextPageUrl())
+                <li><a href="{{ $my_users->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection
