@@ -190,7 +190,7 @@ class WechatUser extends Authenticatable
     }
 
     /**
-     * 我发展的用户id (且包含我自己的)
+     * 我的车库: (如果是我自己是代理人那就包含我自己, 因为只有代理人才能看到, 所以一定会包含我自己)
      *
      * @param $wechatUserId
      * @return mixed

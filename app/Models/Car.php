@@ -194,7 +194,7 @@ class Car extends BaseModel
     }
 
     /**
-     * 我的车库车辆分页, 根据指定状态
+     * 我的车库车辆分页 (拿一级佣金的代理人的人是 "我的团队" 的人), 根据指定状态
      *
      * @param int $carState
      * @return mixed
@@ -203,7 +203,7 @@ class Car extends BaseModel
     {
         $myUserIds = $wechatUser->myUserIds($wechatUser->id);
 
-        return $this->whereIn('wechat_user_id', $myUserIds)
+        return $this->whereIn('first_wechat_user_id', $myUserIds)
                     ->where('car_state', $carState)
                     ->paginate(self::PER_PAGE)
                     ->appends(['car_state' => $carState]);
