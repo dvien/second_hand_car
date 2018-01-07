@@ -101,6 +101,24 @@ class Pay extends BaseModel
     }
 
     /**
+     * 根据提现状态得到详情 url
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getAdminShowUrlAttribute()
+    {
+        switch ($this->pay_state) {
+            case self::STATE_WAIT:
+                $url = url("admin/apply/{$this->id}/deal_wait");
+                break;
+            default:
+                $url = url("admin/apply/{$this->id}");
+        }
+
+        return $url;
+    }
+
+    /**
      * 申请提现账号类型
      *
      * @return array

@@ -35,6 +35,11 @@ class ApplyController extends Controller
 
         $this->data['pay'] = $this->pay->with(['wechat_user'])->find($id);
 
+        // 已经提现过就跳转到详情页
+        if ($this->data['pay']->pay_state == Pay::STATE_OK) {
+            return redirect(url("admin/apply/{$id}"));
+        }
+
         $this->data['pay_states'] = $this->pay->getDealWaitPayStates();
 
         return view('admin.apply.deal_wait', $this->data);

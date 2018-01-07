@@ -19,7 +19,7 @@
                     <td>{{ $pay->created_at_str }}</td>
                     <td>{{ $pay->real_name }}</td>
                     <td>
-                        <a href="/admin/apply/1">
+                        <a href="{{ $pay->admin_show_url }}">
                             <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
                         </a>
                     </td>
