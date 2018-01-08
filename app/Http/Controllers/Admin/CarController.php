@@ -155,6 +155,9 @@ class CarController extends Controller
 
                 // 更新代理人金额
                 if ($input['car_state'] == Car::DONE_CAR_CODE) {
+                    $car->deal_ok_date = date('Y-m-d');
+                    $car->save();
+
                     // 一级代理人
                     if ($car->firstWechatUser) {
                         // 可提现总金额增加

@@ -27,6 +27,7 @@ class Car extends BaseModel
         'description',
         'income',
         'commission',
+        'deal_ok_date',
         'clear_state',
     ];
 
