@@ -41,6 +41,7 @@ class WechatUser extends Authenticatable
         'hangye',
         'job',
         'wechat_user_type',
+        'agent_qrcode_url',
         'first_wechat_user_id',
         'second_wechat_user_id',
         'can_get_price',

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\WechatUserDealWaitPost;
 use App\Models\WechatUser;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use QrCode;
 
 class AgentController extends Controller
 {
@@ -83,8 +85,10 @@ class AgentController extends Controller
             // 如果会员成为代理人后, 拿一级佣金的代理人 变成自己; 拿二级佣金的代理人 变成原来 拿一级佣金的代理人
             if ($wechatUserType == WechatUser::AGENT_CODE) {
                 $wechatUser->second_wechat_user_id = $wechatUser->first_wechat_user_id;
-
+//
                 $wechatUser->first_wechat_user_id = $wechatUser->id;
+
+                $wechatUser->agent_qrcode_url = $this->generateQrcodeUrl($wechatUser->id);
             }
 
             $wechatUser->save();
@@ -100,5 +104,28 @@ class AgentController extends Controller
         $this->data['wechat_user'] = $this->wechatUser->find($id);
 
         return view('admin.agent.show', $this->data);
+    }
+
+    protected function generateQrcodeUrl($id)
+    {
+        $qrcodePath = public_path() . '/images';
+
+        // 生成邀请 url 的二维码
+        QrCode::format('png')->size(80)->margin(0.1)->generate(url("wechat/car/create?wechat_id={$id}"), "{$qrcodePath}/qrcode_{$id}.png");
+
+        // 把生成的二维码放入指定图片里 (成为图片的一小部分)
+        $im = new ImageManager();
+
+        $warter = $im->make("{$qrcodePath}/qrcode_{$id}.png");
+
+        $image  = $im->make("{$qrcodePath}/qrcode_background.png");
+
+        $image->insert($warter, 'top-left', 70, 55);
+
+        $image->save("{$qrcodePath}/agent_qrcode_{$id}.png");
+
+        $url = url("images/agent_qrcode_{$id}.png");
+
+        return $url;
     }
 }
