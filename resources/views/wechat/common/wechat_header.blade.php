@@ -1,6 +1,6 @@
 <div class="row" style="padding-top: 0px;">
     <div class="col-xs-3">
-        <img src="{{ $wechat_headimgurl }}" alt="微信头像">
+        <img src="{{ $wechat_headimgurl }}" style="width: 50px; height: 50px;" alt="微信头像">
     </div>
     <div class="col-xs-9">
         <div class="product-description">昵称：{{ $wechat_nickname }}</div>

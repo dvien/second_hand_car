@@ -16,7 +16,7 @@
 
                 @foreach($my_users as $my_user)
                 <tr>
-                    <td><img src="{{ $my_user->wechat_headimgurl }}" alt="微信头像"></td>
+                    <td><img src="{{ $my_user->wechat_headimgurl }}" style="width: 50px; height: 50px;" alt="微信头像"></td>
                     <td style="vertical-align: middle">{{ $my_user->wechat_nickname }}</td>
                     <td style="vertical-align: middle"><span class="badge bg-red">{{ $my_user->cars->count() }}</span></td>
                 </tr>
