@@ -100,7 +100,8 @@ class AgentController extends Controller
     public function qrCode()
     {
         $this->data['page_title'] = '推广二维码';
-        // TODO: 二维码生成尚未处理
+
+        $this->data['qrcode_url'] = $this->auth->agent_qrcode_url;
 
         return view('wechat.agent.qr_code', $this->data);
     }
