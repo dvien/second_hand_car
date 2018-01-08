@@ -85,7 +85,7 @@ class AgentController extends Controller
             // 如果会员成为代理人后, 拿一级佣金的代理人 变成自己; 拿二级佣金的代理人 变成原来 拿一级佣金的代理人
             if ($wechatUserType == WechatUser::AGENT_CODE) {
                 $wechatUser->second_wechat_user_id = $wechatUser->first_wechat_user_id;
-//
+
                 $wechatUser->first_wechat_user_id = $wechatUser->id;
 
                 $wechatUser->agent_qrcode_url = $this->generateQrcodeUrl($wechatUser->id);
@@ -125,6 +125,8 @@ class AgentController extends Controller
         $image->save("{$qrcodePath}/agent_qrcode_{$id}.png");
 
         $url = url("images/agent_qrcode_{$id}.png");
+
+        unlink("{$qrcodePath}/qrcode_{$id}.png");
 
         return $url;
     }
