@@ -10,18 +10,18 @@
  */
 
 return [
-    'enable_mock' => env('WECHAT_ENABLE_MOCK', true),
-
-    'mock_user' => [
-        'openid' => 'odh7zsgI75iT8FRh0fGlSojc9PWM',
-        // 以下字段为 scope 为 snsapi_userinfo 时需要
-        'nickname' => 'overtrue',
-        'sex' => '1',
-        'province' => '北京',
-        'city' => '北京',
-        'country' => '中国',
-        'headimgurl' => 'http://wx.qlogo.cn/mmopen/C2rEUskXQiblFYMUl9O0G05Q6pKibg7V1WpHX6CIQaic824apriabJw4r6EWxziaSt5BATrlbx1GVzwW2qjUCqtYpDvIJLjKgP1ug/0',
-    ],
+//    'enable_mock' => env('WECHAT_ENABLE_MOCK', true),
+//
+//    'mock_user' => [
+//        'openid' => 'odh7zsgI75iT8FRh0fGlSojc9PWM',
+//        // 以下字段为 scope 为 snsapi_userinfo 时需要
+//        'nickname' => 'overtrue',
+//        'sex' => '1',
+//        'province' => '北京',
+//        'city' => '北京',
+//        'country' => '中国',
+//        'headimgurl' => 'http://wx.qlogo.cn/mmopen/C2rEUskXQiblFYMUl9O0G05Q6pKibg7V1WpHX6CIQaic824apriabJw4r6EWxziaSt5BATrlbx1GVzwW2qjUCqtYpDvIJLjKgP1ug/0',
+//    ],
 
     /*
      * 默认配置，将会合并到各模块中
@@ -79,9 +79,9 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'your-app-id'),         // AppID
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'your-app-secret'),    // AppSecret
-            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),           // Token
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxd30f1138acb23d66'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'ea22026eb63ba34fa842b36ce4c98a4a'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'testing'),           // Token
             'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
 
             /*
@@ -90,10 +90,10 @@ return [
              * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
              * callback：OAuth授权完成后的回调页地址(如果使用中间件，则随便填写。。。)
              */
-            // 'oauth' => [
-            //     'scopes'   => array_map('trim', explode(',', env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
-            //     'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
-            // ],
+//             'oauth' => [
+//                 'scopes'   => array_map('trim', explode(',', env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
+//                 'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', 'http://lara.s1.natapp.cc/wechat/wechat_user_oauth'),
+//             ],
         ],
     ],
 

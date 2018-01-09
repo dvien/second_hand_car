@@ -7,7 +7,7 @@ Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function (
 
     Route::any('/wechat_serve', 'WechatController@serve');
 
-    Route::get('/wechat_user', 'WechatController@user')->middleware('wechat.oauth');
+    Route::get('/wechat_user_oauth', 'WechatController@userOauth');
 
     Route::middleware(['web', 'is_wechat_login'])->group(function () {
         Route::get('/', function () {

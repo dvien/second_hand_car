@@ -19,10 +19,16 @@ class IsWechatLoginMiddleware
         if ($this->guard()->check()) {
             return $next($request);
         } else {
-            // TODO: 没有微信登陆就登陆一个测试账号
-            $this->guard()->loginUsingId(1, true);
+            // TODO: 授权后跳转 url
+            $oauthUrl = "http://lara.s1.natapp.cc/wechat/wechat_user_oauth";
 
-            return $next($request);
+            if ($request->get('wechat_id')) {
+                $oauthUrl = "{$oauthUrl}?wechat_id={$request->get('wechat_id')}";
+            }
+
+            $wechatApp = app('wechat.official_account');
+
+            return $wechatApp->oauth->redirect($oauthUrl);
         }
     }
 
