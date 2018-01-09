@@ -1,9 +1,15 @@
 <?php
 
+use Overtrue\Socialite\User as SocialiteUser;
+
 Route::namespace('Wechat')->prefix('/wechat')->name('wechat.')->group(function () {
     Auth::routes();
 
-    Route::middleware(['is_wechat_login'])->group(function () {
+    Route::any('/wechat_serve', 'WechatController@serve');
+
+    Route::get('/wechat_user', 'WechatController@user')->middleware('wechat.oauth');
+
+    Route::middleware(['web', 'is_wechat_login'])->group(function () {
         Route::get('/', function () {
             return redirect(url('wechat/car/create'));
         });
