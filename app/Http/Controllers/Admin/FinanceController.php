@@ -3,22 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Car;
-use App\Repositories\CarRepository;
+use App\Models\Clear;
 
 class FinanceController extends Controller
 {
-    protected $carRepository;
+    protected $clear;
 
-    public function __construct(CarRepository $carRepository)
+    protected $car;
+
+    public function __construct(Clear $clear, Car $car)
     {
         parent::__construct();
 
-        $this->carRepository = $carRepository;
+        $this->clear = $clear;
+
+        $this->car = $car;
     }
 
     public function index()
     {
         $this->data['page_title'] = '财务列表';
+
+        $this->clear->lastWeekSummary();
 
         return view('admin.finance.index', $this->data);
     }
@@ -36,4 +42,5 @@ class FinanceController extends Controller
 
         return view('admin.finance.show', $this->data);
     }
+
 }
