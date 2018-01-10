@@ -17,15 +17,35 @@ class Clear extends BaseModel
         'clear_state',
     ];
 
+    protected $appends = [
+        'button',
+        'clear_state_str',
+    ];
+
     // 结算状态
     // 未处理
     const CLEAR_NEW = 0;
 
-    // 等待结算
+    // 待结算
     const CLEAR_WAIT = 1;
 
     // 已结算
     const CLEAR_OK = 2;
+
+    public $clearStates = [
+        [
+            'code' => self::CLEAR_NEW,
+            'name' => '未处理',
+        ],
+        [
+            'code' => self::CLEAR_WAIT,
+            'name' => '待结算',
+        ],
+        [
+            'code' => self::CLEAR_OK,
+            'name' => '已结算',
+        ],
+    ];
 
     /**
      * 结算涉及的车辆
@@ -33,6 +53,59 @@ class Clear extends BaseModel
     public function cars()
     {
         return $this->belongsToMany(Car::class, 'clear_car', 'clear_id', 'car_id');
+    }
+
+    /**
+     * 根据状态返回详情按钮信息
+     *
+     * @return array
+     */
+    public function getButtonAttribute()
+    {
+        $result = [
+            'url' => '',
+            'str' => '',
+        ];
+
+        switch ($this->clear_state) {
+            case self::CLEAR_WAIT:
+                $result = [
+                    'url' => url("admin/finance/{$this->id}/deal_wait"),
+                    'str' => '待结算',
+                ];
+                break;
+            default:
+                $result = [
+                    'url' => url("admin/finance/{$this->id}"),
+                    'str' => '详情',
+                ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * 结算状态转中文
+     *
+     * @return string
+     */
+    public function getClearStateStrAttribute()
+    {
+        foreach ($this->clearStates AS $clearState) {
+            if ($clearState['code'] == $this->clear_state) {
+                return $clearState['name'];
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * 结算列表
+     */
+    public function getList()
+    {
+        return $this->orderBy('end_date', 'DESC')->paginate(self::PER_PAGE);
     }
 
     /**

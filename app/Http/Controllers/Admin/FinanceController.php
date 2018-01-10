@@ -26,6 +26,8 @@ class FinanceController extends Controller
 
         $this->clear->lastWeekSummary();
 
+        $this->data['finances'] = $this->clear->getList();
+
         return view('admin.finance.index', $this->data);
     }
 

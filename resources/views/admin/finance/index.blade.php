@@ -5,6 +5,12 @@
 
     @include('admin.common.admin_finance_state')
 
+    <style>
+        .table>tbody>tr>td {
+            vertical-align: middle;
+        }
+    </style>
+
     <div class="table-striped text-center">
         <table class="table" style="margin-bottom: 0px;">
             <tbody>
@@ -16,40 +22,32 @@
                     <th class="text-center">操作</th>
                 </tr>
 
+                @foreach($finances as $finance)
                 <tr>
-                    <td>2017.12.21</td>
-                    <td>1000</td>
-                    <td>500</td>
-                    <td>500</td>
+                    <td> {{ $finance->start_date }}<br/>{{ $finance->end_date }} </td>
+                    <td> {{ $finance->income }} </td>
+                    <td> {{ $finance->commission }} </td>
+                    <td> {{ $finance->profit }} </td>
                     <td>
-                        <a href="/admin/finance/1">
-                            <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
+                        <a href="{{ $finance->button['url'] }}">
+                            <button type="button" class="btn btn-xs btn-block btn-default">{{ $finance->button['str'] }}</button>
                         </a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>2017.12.21</td>
-                    <td>800</td>
-                    <td>300</td>
-                    <td>500</td>
-                    <td>
-                        <a href="/admin/finance/1/deal_wait">
-                            <button type="button" class="btn btn-xs btn-block btn-default">详情</button>
-                        </a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
+            @if($finances->previousPageUrl())
+                <li><a href="{{ $finances->previousPageUrl() }}">«</a></li>
+            @endif
+
+            @if($finances->nextPageUrl())
+                <li><a href="{{ $finances->nextPageUrl() }}">»</a></li>
+            @endif
         </ul>
     </div>
 @endsection
