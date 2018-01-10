@@ -11,11 +11,11 @@ class HomeController extends Controller
         return redirect('admin/center');
     }
 
-    public function center()
+    public function center(Car $car)
     {
         $this->data['page_title'] = '后台首页';
 
-        $this->data['cars_count'] = (new Car())->countByState();
+        $this->data['cars_count'] = $car->countByState();
 
         return view('admin.center', $this->data);
     }
