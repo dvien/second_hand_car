@@ -15,7 +15,7 @@ class CreateClearCar extends Migration
     {
         Schema::create('clear_car', function (Blueprint $table) {
             $table->integer('clear_id');
-            $table->integer('car_id');
+            $table->integer('car_id')->unique(); // 每辆车只可能结算一次, 所以唯一
         });
     }
 
