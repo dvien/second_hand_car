@@ -101,6 +101,22 @@ class Clear extends BaseModel
     }
 
     /**
+     * 处理 待结算 需要的下拉状态
+     */
+    public function getDealWaitStates()
+    {
+        $needCodes = [
+            self::CLEAR_OK,
+        ];
+
+        $result = array_filter($this->clearStates, function ($state) use($needCodes) {
+            return in_array($state['code'], $needCodes);
+        });
+
+        return $result;
+    }
+
+    /**
      * 结算列表
      */
     public function getList()

@@ -3,7 +3,7 @@
 @section('content')
     @include('admin.common.admin_header')
 
-    @include('admin.common.admin_finance_state')
+    {{--@include('admin.common.admin_finance_state')--}}
 
     <style>
         .table>tbody>tr>td {

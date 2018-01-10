@@ -84,6 +84,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
         // 财务处理
         Route::get('/finance/{id}/deal_wait', 'FinanceController@dealWait');
 
+        Route::post('/finance/{id}/deal_wait', 'FinanceController@dealWaitUpdate');
+
         // 财务详情
         Route::get('/finance/{id}', 'FinanceController@show');
     });
