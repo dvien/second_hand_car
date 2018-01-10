@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-01-08 23:32:53
+Date: 2018-01-11 00:43:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,8 +75,8 @@ CREATE TABLE `car` (
 -- ----------------------------
 -- Records of car
 -- ----------------------------
-INSERT INTO `car` VALUES ('1', '1', '1登记的车1', '0', '11111111111', '1车', '9000.00', '2018-04-01', '软件园1', '3', '1', '1000.00', '1', '300.00', '0', '0.00', '', '700.00', '300.00', '2018-01-07', '0', '2018-01-07 21:27:40', '2018-01-07 23:15:07', null);
-INSERT INTO `car` VALUES ('2', '1', '1登记的车2', '0', '11111111111', '1车', '998.00', '2018-02-01', '软件园1', '3', '1', '2000.00', '1', '200.00', '0', '0.00', '', '1800.00', '200.00', '2018-01-07', '0', '2018-01-07 21:28:17', '2018-01-07 23:23:57', null);
+INSERT INTO `car` VALUES ('1', '1', '1登记的车1', '0', '11111111111', '1车', '9000.00', '2018-04-01', '软件园1', '3', '1', '1000.00', '1', '300.00', '0', '0.00', '', '700.00', '300.00', '2018-01-07', '2', '2018-01-07 21:27:40', '2018-01-11 00:40:48', null);
+INSERT INTO `car` VALUES ('2', '1', '1登记的车2', '0', '11111111111', '1车', '998.00', '2018-02-01', '软件园1', '3', '1', '2000.00', '1', '200.00', '0', '0.00', '', '1800.00', '200.00', '2018-01-07', '2', '2018-01-07 21:28:17', '2018-01-11 00:40:48', null);
 INSERT INTO `car` VALUES ('3', '2', '2登记的车1', '0', '22222222222', '2车', '10000.00', '2018-01-01', '软件园2', '3', '1', '2000.00', '2', '500.00', '1', '300.00', '', '1200.00', '800.00', '2018-01-08', '0', '2018-01-07 21:29:40', '2018-01-08 22:16:12', null);
 INSERT INTO `car` VALUES ('4', '2', '2登记的车2', '0', '22222222222', '2车', '20000.00', '2018-01-03', '软件园2', '1', '0', '0.00', '2', '0.00', '1', '0.00', '', '0.00', '0.00', null, '0', '2018-01-07 21:30:45', '2018-01-07 21:30:45', null);
 INSERT INTO `car` VALUES ('6', '3', '3登记的车1', '0', '33333333333', '3车', '30000.00', '2018-01-01', '软件园3', '1', '0', '0.00', '1', '0.00', '0', '0.00', '', '0.00', '0.00', null, '0', '2018-01-07 21:35:20', '2018-01-07 21:35:20', null);
@@ -93,6 +93,7 @@ CREATE TABLE `clear` (
   `start_date` date NOT NULL COMMENT '结算开始日期: 包含',
   `end_date` date NOT NULL COMMENT '结算截止日期: 包含',
   `income` decimal(8,2) NOT NULL COMMENT '收入',
+  `commission` decimal(8,2) NOT NULL COMMENT '分佣',
   `profit` decimal(8,2) NOT NULL COMMENT '利润',
   `clear_state` int(11) NOT NULL DEFAULT '0' COMMENT '结算状态: 0 未处理; 1 等待结算 2 已结算;',
   `admin_user_id` int(11) NOT NULL DEFAULT '0' COMMENT '最后一次操作本条记录的后台用户',
@@ -100,11 +101,12 @@ CREATE TABLE `clear` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of clear
 -- ----------------------------
+INSERT INTO `clear` VALUES ('3', '2018-01-01', '2018-01-07', '2500.00', '500.00', '3000.00', '2', '1', '2018-01-10 22:55:02', '2018-01-11 00:40:48', null);
 
 -- ----------------------------
 -- Table structure for clear_car
@@ -112,12 +114,15 @@ CREATE TABLE `clear` (
 DROP TABLE IF EXISTS `clear_car`;
 CREATE TABLE `clear_car` (
   `clear_id` int(11) NOT NULL,
-  `car_id` int(11) NOT NULL
+  `car_id` int(11) NOT NULL,
+  UNIQUE KEY `clear_car_car_id_unique` (`car_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of clear_car
 -- ----------------------------
+INSERT INTO `clear_car` VALUES ('3', '1');
+INSERT INTO `clear_car` VALUES ('3', '2');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -128,18 +133,18 @@ CREATE TABLE `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
 -- ----------------------------
 INSERT INTO `migrations` VALUES ('10', '2014_10_12_100000_create_password_resets_table', '1');
-INSERT INTO `migrations` VALUES ('15', '2018_01_04_145422_create_clear_car', '5');
 INSERT INTO `migrations` VALUES ('17', '2018_01_04_141051_create_wechat_user', '6');
 INSERT INTO `migrations` VALUES ('18', '2014_10_12_000000_create_admin_user_table', '7');
 INSERT INTO `migrations` VALUES ('19', '2018_01_04_145600_create_pay', '8');
-INSERT INTO `migrations` VALUES ('20', '2018_01_04_144459_create_clear', '9');
 INSERT INTO `migrations` VALUES ('21', '2018_01_04_142351_create_car', '10');
+INSERT INTO `migrations` VALUES ('22', '2018_01_04_144459_create_clear', '11');
+INSERT INTO `migrations` VALUES ('23', '2018_01_04_145422_create_clear_car', '12');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -213,7 +218,7 @@ CREATE TABLE `wechat_user` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `wechat_user_wechat_openid_unique` (`wechat_openid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of wechat_user
@@ -222,3 +227,4 @@ INSERT INTO `wechat_user` VALUES ('1', '0001', '第一个代理人nickname', 'ht
 INSERT INTO `wechat_user` VALUES ('2', '0002', '第二个代理人niciname', 'http://img2.woyaogexing.com/2018/01/04/d94985ec28e9d71d!400x400_big.jpg', '', '0', '第二个代理人', '0', '13444444444', '2行业', '2工作', '1', 'http://localhost:8000/images/agent_qrcode_2.png', '2', '1', '500.00', '0.00', '0.00', '500.00', '8fdMyXPiS2uC89OOtJiOYbF3e6EHvR3LjuKaDFzkxA4pu4UJhKTitaOQTbCy', '2018-01-05 00:13:53', '2018-01-08 23:14:48', null);
 INSERT INTO `wechat_user` VALUES ('3', '0003', '1的会员', 'http://img2.woyaogexing.com/2017/12/15/584769807d9c5326!400x400_big.jpg', '', '0', '1会员要代理', '1', '11111111111', '保险行业1', '保险经理1', '1', 'http://localhost:8000/images/agent_qrcode_3.png', '3', '1', '0.00', '0.00', '0.00', '0.00', 'ibuQwBPPNx4LoVf8apUhAqhclBHwsHFx4hoMN32nvRA4yDbXsf6SmQrk6H43', '2018-01-05 00:14:56', '2018-01-08 23:14:54', null);
 INSERT INTO `wechat_user` VALUES ('4', '0004', '2的会员', 'http://img2.woyaogexing.com/2017/11/30/e924b4605dce4c3c!400x400_big.jpg', '', '0', '4会员要代理', '2', '14444444444', '无', '我', '1', 'http://localhost:8000/images/agent_qrcode_4.png', '4', '2', '0.00', '0.00', '0.00', '0.00', 'd9CSXvhDDDXvmKVu1Po3PZyd4a2yueHlgj3sZuPQ1pzk7PbEg8iEK2xhpm1r', '2018-01-05 00:14:56', '2018-01-08 23:14:59', null);
+INSERT INTO `wechat_user` VALUES ('5', 'oN53EjrVTAXgqEtlZ84LcOwvmREg', '我是蒲公英', 'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erzKd7en8icPJO0Ok3icPq84ISadMGngT7WItoqxrA1x28WSdMtbyj00FNDBWReDIdiaDlVX1FOSpzMA/0', '', '0', '', '0', '', '', '', '0', '', '1', '0', '0.00', '0.00', '0.00', '0.00', 'DDo69rZGt6ANmLJmCtEythuCXRpUGtSyTR2cKe5ZgF5zGrJahv6931quOJ6a', '2018-01-09 22:02:55', '2018-01-09 22:16:24', null);
