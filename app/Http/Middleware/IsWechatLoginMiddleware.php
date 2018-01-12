@@ -19,8 +19,8 @@ class IsWechatLoginMiddleware
         if ($this->guard()->check()) {
             return $next($request);
         } else {
-            // TODO: 授权后跳转 url
-            $oauthUrl = "http://lara.s1.natapp.cc/wechat/wechat_user_oauth";
+            // 授权后跳转 url
+            $oauthUrl = url("wechat/wechat_user_oauth");
 
             if ($request->get('wechat_id')) {
                 $oauthUrl = "{$oauthUrl}?wechat_id={$request->get('wechat_id')}";

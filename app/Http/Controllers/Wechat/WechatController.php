@@ -50,9 +50,7 @@ class WechatController
         // 接入 laravel 的登录
         $this->guard()->loginUsingId($item->id, true);
 
-        // TODO: 跳回等级车辆页面
-//        return redirect(url('wechat/car/create'));
-        return redirect('http://lara.s1.natapp.cc/wechat/car/create');
+        return redirect(url('wechat/car/create'));
     }
 
     protected function guard()
