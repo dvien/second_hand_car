@@ -3,7 +3,7 @@
 @section('content')
     @include('wechat.common.wechat_header')
 
-    <div style="padding-top: 30px;"></div>
+
 
     <div class="table-striped text-center">
         <table class="table" style="margin-bottom: 0px;">

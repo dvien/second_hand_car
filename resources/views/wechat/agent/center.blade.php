@@ -9,7 +9,7 @@
         }
     </style>
 
-    <div style="padding-top: 30px;"></div>
+
 
     <div class="row text-center">
         <a href="{{ url('wechat/agent/rule') }}" style="color: #333;">

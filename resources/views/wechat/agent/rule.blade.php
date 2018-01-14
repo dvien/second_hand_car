@@ -3,7 +3,7 @@
 @section('content')
     @include('wechat.common.wechat_header')
 
-    <div class="row" style="padding-top: 30px">
+    <div class="row">
         <div class="col-xs-12">
             <div class="product-description">1.代您只需分享推广“高价收车，上门评估”页面即可，有客户登记，并且我们收购成功，您马上有1000元的提成;</div>
         </div>

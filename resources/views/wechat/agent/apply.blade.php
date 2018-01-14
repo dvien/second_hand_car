@@ -3,7 +3,7 @@
 @section('content')
     @include('wechat.common.wechat_header')
 
-    <div style="padding-top: 30px;"></div>
+
 
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group">
