@@ -111,7 +111,7 @@ class AgentController extends Controller
         $qrcodePath = public_path() . '/images';
 
         // 生成邀请 url 的二维码
-        QrCode::format('png')->size(80)->margin(0.1)->generate(url("wechat/car/create?wechat_id={$id}"), "{$qrcodePath}/qrcode_{$id}.png");
+        QrCode::format('png')->size(430)->margin(0.2)->generate(url("wechat/car/create?wechat_id={$id}"), "{$qrcodePath}/qrcode_{$id}.png");
 
         // 把生成的二维码放入指定图片里 (成为图片的一小部分)
         $im = new ImageManager();
@@ -120,7 +120,7 @@ class AgentController extends Controller
 
         $image  = $im->make("{$qrcodePath}/qrcode_background.png");
 
-        $image->insert($warter, 'top-left', 70, 55);
+        $image->insert($warter, 'top-left', 148, 412);
 
         $image->save("{$qrcodePath}/agent_qrcode_{$id}.png");
 
