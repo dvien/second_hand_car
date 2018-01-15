@@ -11,6 +11,7 @@
 |
 */
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
 
@@ -19,6 +20,16 @@ Route::get('/', function () {
         \Auth::guard('wechat')->user()
     );
 //    return view('welcome');
+});
+
+Route::get('/clear', function (\Illuminate\Http\Request $request) {
+    Auth::logout();
+
+    Auth::guard('wechat')->logout();
+
+    $request->session()->invalidate();
+
+    dd('clear ok!');
 });
 
 Route::get('/qr_code', function () {
