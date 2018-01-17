@@ -72,47 +72,45 @@
         </div>
 
         <div class="box-footer text-center" style="border: none;">
-            <button type="submit" class="btn btn-info">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+            <button type="button" class="btn btn-flat btn-info" data-toggle="modal" data-target="#modal-default">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
         </div>
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog" style="margin: 200px auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>请您点击 "确认" 提交信息.</p>
+                        <p>我们将尽快联系您.</p>
+                        <p>请保持手机通畅！</p>
+                    </div>
+                    <div class="modal-footer">
+                        {{--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>--}}
+                        <button type="submit" class="btn btn-flat btn-primary">确认</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
     </form>
 
-    <div class="row text-center" style="padding-top: 10px">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <img src="https://adminlte.io/themes/AdminLTE/dist/img/default-50x50.gif" alt="Product Image">
+    <div class="row text-center">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <img class="img-responsive" src="{{ asset('images/car_create.png') }}">
         </div>
-        <div class="col-xs-6">
-            <div class="product-description">我们有渠道优势</div>
-            <div class="product-description">让您的车更值钱</div>
-        </div>
-        <div class="col-xs-2"></div>
+        <div class="col-xs-1"></div>
     </div>
 
-    <div class="row text-center" style="padding-top: 10px">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <img src="https://adminlte.io/themes/AdminLTE/dist/img/default-50x50.gif" alt="Product Image">
-        </div>
-        <div class="col-xs-6">
-            <div class="product-description">价格满意，立即打款</div>
-            <div class="product-description">让您迅速回笼资金</div>
-        </div>
-        <div class="col-xs-2"></div>
     </div>
 
-    <div class="row text-center" style="padding-top: 10px">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <img src="https://adminlte.io/themes/AdminLTE/dist/img/default-50x50.gif" alt="Product Image">
-        </div>
-        <div class="col-xs-6">
-            <div class="product-description">预约您方便的时间</div>
-            <div class="product-description">我们亲自上门评估</div>
-        </div>
-        <div class="col-xs-2"></div>
-    </div>
-
-    <div class="row" style="position:fixed;  bottom:0;">
+    <div class="row navbar-fixed-bottom">
         @if($wechat_user_type == 1)
             <a href="{{ url('wechat/agent/center') }}">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -131,7 +129,5 @@
             </a>
         @endif
     </div>
-
-    <div style="padding-top: 20px;"></div>
 </div>
 @endsection
