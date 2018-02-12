@@ -147,6 +147,9 @@ class CarController extends Controller
                     break;
             }
 
+            // 没有填写 情况 处理
+            $input['description'] = $input['description'] ? : '';
+
             $input['admin_user_id'] = $this->auth->id;
 
             DB::transaction(function () use ($car, $input) {
