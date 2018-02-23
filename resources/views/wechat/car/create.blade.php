@@ -8,7 +8,7 @@ body {
 }
 </style>
 
-<div class="row">
+<div class="">
     <div class="row text-center">
         <div class="col-xs-12">
             <img class="img-responsive" src="{{ asset('images/wechat_car_create_header.jpg') }}">
@@ -106,15 +106,12 @@ body {
             </div>
             <!-- /.modal-dialog -->
         </div>
-
     </form>
 
     <div class="row text-center">
         <div class="col-xs-12">
             <img class="img-responsive" src="{{ asset('images/wechat_car_create_footer.jpg') }}">
         </div>
-    </div>
-
     </div>
 
     <div class="row navbar-fixed-bottom">

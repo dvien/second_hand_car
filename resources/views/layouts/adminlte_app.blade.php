@@ -12,7 +12,7 @@
 
 <div class="wrapper" style="height: auto; min-height: 100%;">
     <div class="">
-        <section class="content" style="padding-top: 0px; padding-bottom: 0px;">
+        <section class="" style="padding-top: 0px; padding-bottom: 0px;">
             @yield('content')
         </section>
     </div>
