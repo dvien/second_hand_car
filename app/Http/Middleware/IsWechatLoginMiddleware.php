@@ -22,7 +22,7 @@ class IsWechatLoginMiddleware
         } else {
             // 开发环境下模拟登录微信账号
             if (App::environment('local')) {
-                $this->guard()->loginUsingId(5, true);
+                $this->guard()->loginUsingId(1, true);
 
                 return $next($request);
             }
