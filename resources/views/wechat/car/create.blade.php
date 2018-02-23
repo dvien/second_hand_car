@@ -60,7 +60,7 @@ body {
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">期望售价:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="price" name="price" placeholder="期望售价" type="text">
+                    <input class="form-control" id="price" name="price" placeholder="期望售价" type="text" maxlength="8">
                 </div>
             </div>
 
