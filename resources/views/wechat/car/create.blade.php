@@ -122,7 +122,7 @@ body {
             <a href="{{ url('wechat/agent/center') }}">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button " class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 35px;">代理中心</button>
+                        <button type="button " class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 50px;">代理中心</button>
                     </div>
                 </div>
             </a>
@@ -130,7 +130,7 @@ body {
             <a href="{{ url('wechat/agent/create') }}">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 35px;">我要代理</button>
+                        <button type="button" class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 50px;">我要代理</button>
                     </div>
                 </div>
             </a>
