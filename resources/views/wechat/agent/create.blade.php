@@ -28,7 +28,7 @@ body {
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">姓名:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="name" name="name" placeholder="姓名" type="text">
+                    <input class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="姓名" type="text">
                 </div>
             </div>
 
@@ -40,7 +40,7 @@ body {
                         @if($value['code'] > 0)
                             <div class="radio col-xs-6 text-center">
                                 <label>
-                                    <input name="sex" value={{ $value['code'] }} checked="" type="radio">
+                                    <input name="sex" value={{ $value['code'] }} @if($user->sex == $value['code']) checked="checked" @endif type="radio">
                                     {{ $value['name'] }}
                                 </label>
                             </div>
@@ -52,28 +52,34 @@ body {
             <div class="form-group">
                 <label for="phone" class="col-sm-2 control-label">手机号码:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="phone" name="phone" placeholder="手机号码" type="text">
+                    <input class="form-control" id="phone" name="phone" value="{{ $user->phone }}" placeholder="手机号码" type="text">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="hangye" class="col-sm-2 control-label">从事行业:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="hangye" name="hangye" placeholder="从事行业" type="text">
+                    <input class="form-control" id="hangye" name="hangye" value="{{ $user->hangye }}"placeholder="从事行业" type="text">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="job" class="col-sm-2 control-label">职务:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="job" name="job" placeholder="职务" type="text">
+                    <input class="form-control" id="job" name="job" value="{{ $user->job }}" placeholder="职务" type="text">
                 </div>
             </div>
 
         </div>
         <!-- /.box-body -->
         <div class="box-footer text-center" style="background-color: #0d0d0d; border: none;">
-            <button type="submit" class="btn btn-info" style="background-color: #505265; border: none;">&nbsp;&nbsp;申请&nbsp;&nbsp;</button>
+            <button type="submit" class="btn btn-info" style="background-color: #505265; border: none;">
+            @if($user->wechat_user_type == 2)
+                &nbsp;&nbsp;审核中&nbsp;&nbsp;
+            @else
+                &nbsp;&nbsp;申请&nbsp;&nbsp;
+            @endif
+            </button>
         </div>
         <!-- /.box-footer -->
     </form>

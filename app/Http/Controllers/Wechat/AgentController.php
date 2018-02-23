@@ -37,6 +37,8 @@ class AgentController extends Controller
 
         $this->data['sex'] = (new WechatUser())->sexes;
 
+        $this->data['user'] = $this->guard()->user();        
+
         return view('wechat.agent.create', $this->data);
     }
 
