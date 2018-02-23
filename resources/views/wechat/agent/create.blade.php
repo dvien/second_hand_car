@@ -14,7 +14,7 @@ body {
 }
 </style>
 
-<div class="row">
+<div class="">
     <div class="row text-center">
         <div class="col-xs-12">
             <img class="img-responsive" src="{{ asset('images/wechat_agent_create_header.jpg') }}">

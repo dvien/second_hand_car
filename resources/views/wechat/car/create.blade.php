@@ -85,7 +85,7 @@ body {
         </div>
 
         <div class="modal fade" id="modal-default">
-            <div class="modal-dialog" style="margin: 200px auto;">
+            <div class="modal-dialog" style="margin: 200px auto; color: black;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -99,7 +99,7 @@ body {
                     </div>
                     <div class="modal-footer">
                         {{--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>--}}
-                        <button type="submit" class="btn btn-flat btn-primary">确认</button>
+                        <button type="submit" class="btn btn-flat btn-primary" style="background-color: #505265; border: none;">确认</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
