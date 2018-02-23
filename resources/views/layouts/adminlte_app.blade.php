@@ -11,8 +11,8 @@
 <body class="hold-transition" style="max-width: 680px; margin-left: auto; margin-right: auto;">
 
 <div class="wrapper" style="height: auto; min-height: 100%;">
-    <div class="content">
-        <section class="content" style="padding-top: 0px;">
+    <div class="">
+        <section class="content" style="padding-top: 0px; padding-bottom: 0px;">
             @yield('content')
         </section>
     </div>

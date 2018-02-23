@@ -1,12 +1,20 @@
 @extends('layouts.adminlte_app')
 
-@component('layouts.adminlte_header')
-<h1>高价收车, 上门评估</h1>
-<div>仅限闽D车</div>
-@endcomponent
-
 @section('content')
+<style>
+body {
+    background-color: #30313d;
+    color: white;
+}
+</style>
+
 <div class="row">
+    <div class="row text-center">
+        <div class="col-xs-12">
+            <img class="img-responsive" src="{{ asset('images/wechat_car_create_header.jpg') }}">
+        </div>
+    </div>
+
     <form class="form-horizontal" method="POST" action="{{ url('wechat/car') }}">
         {{ csrf_field() }}
 
@@ -71,8 +79,9 @@
             </div>
         </div>
 
-        <div class="box-footer text-center" style="border: none;">
-            <button type="button" class="btn btn-flat btn-info" data-toggle="modal" data-target="#modal-default">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+        <div class="box-footer text-center" style="border: none; background-color: #30313d;">
+            <button type="button" class="btn btn-flat btn-info" style="background-color: #505265; border: none;"
+                data-toggle="modal" data-target="#modal-default">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
         </div>
 
         <div class="modal fade" id="modal-default">
@@ -101,11 +110,9 @@
     </form>
 
     <div class="row text-center">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-10">
-            <img class="img-responsive" src="{{ asset('images/car_create.png') }}">
+        <div class="col-xs-12">
+            <img class="img-responsive" src="{{ asset('images/wechat_car_create_footer.jpg') }}">
         </div>
-        <div class="col-xs-1"></div>
     </div>
 
     </div>
@@ -115,7 +122,7 @@
             <a href="{{ url('wechat/agent/center') }}">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button " class="btn btn-flat btn-primary">代理中心</button>
+                        <button type="button " class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 35px;">代理中心</button>
                     </div>
                 </div>
             </a>
@@ -123,7 +130,7 @@
             <a href="{{ url('wechat/agent/create') }}">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-flat btn-primary">我要代理</button>
+                        <button type="button" class="btn btn-flat btn-primary" style="background-color: #ffa509; border: none; height: 35px;">我要代理</button>
                     </div>
                 </div>
             </a>
